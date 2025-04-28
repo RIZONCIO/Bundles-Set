@@ -9,6 +9,7 @@ export default function Header_() {
           Steam Bundle Set
           <img src="src/assets/img/logo2.png" alt="Logo" />
         </a>
+        <p>OI</p>
       </div>
       <section id="dark-container"></section>
     </header>
