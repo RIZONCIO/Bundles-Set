@@ -8,6 +8,10 @@ export default function Header_() {
           <img src="src/assets/img/logo2.png" alt="Logo" />
           Steam Bundle Set
           <img src="src/assets/img/logo2.png" alt="Logo" />
+          <p>
+            <span>Steam</span> Bundle Set
+            <span>merge conflict test</span> Bundle Set 
+          </p>
         </a>
       </div>
       <section id="dark-container"></section>
