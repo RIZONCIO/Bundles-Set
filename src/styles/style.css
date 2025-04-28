@@ -1,0 +1,63 @@
+@import url("./Header.css");
+@import url("./Card.css");
+@import url("./Modal.css");
+@import url("./Buscardor.css");
+@import url("./Filtros.css");
+@import url("./Carousel.css");
+@import url("./Darkmode.css");
+@import url("./Footer.css");
+@import url("./buttonLoadMore.css");
+@import url("./StylesPage/Sobre.css");
+@import url("./StylesPage/Credito.css");
+@import url("./StylesPage/Termouso.css");
+@import url("./StylesPage/Doacao.css");
+
+:root {
+  --branco-neve: #e0e0e0;
+  --bg-dark: #121212;
+  --bg-light: #e8e8e8;
+  --bg-header: #171a21;
+  --cor-bordar: #121417;
+  --cor-do-bg: #121212;
+  --bg-card: #1f1f1f;
+  --font-cor: #c7d5e0;
+  --font-cor2: rgba(255, 255, 0, 0.952);
+  --neon-efc: rgba(255, 226, 76, 0.8), 0 0 10px rgba(255, 226, 76, 0.7),
+    0 0 20px rgba(255, 226, 76, 0.6), 0 0 40px rgba(255, 226, 76, 0.5);
+  --bordar-cinza: #d1d5db;
+  --cor-de-buttontrue: #66c0f4;
+  --preco-cor: #00e205;
+  --cmd-cor: #00ff00;
+  --brilho-azul: rgb(102, 192, 244, 0.8);
+  --cor-de-buttonfalse: #e6796c;
+  --cor-da-track: rgba(255, 255, 255, 0.1);
+  --cor-da-handle: rgba(255, 255, 255, 0.4);
+  --eft-do-track: rgba(255, 255, 255, 0.6);
+  --bd-checkbox: rgba(255, 255, 255, 0.5);
+  --cor-checked: rgb(102, 192, 244, 0.8);
+  --cor-bd-checked: rgba(255, 255, 255, 1);
+  --cor-hover-checked: rgba(255, 255, 255, 0.3);
+  --litra-footer: rgba(201, 201, 201, 0.479);
+  --bg-mode-light: #e0e0e0;
+  --bg-mode-dark: #151515;
+  --text-light: #424242;
+  --text-dark: #fff;
+  --switch-bg-light: #fff;
+  --switch-bg-dark: #3c3c3c;
+  --shadow-light: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;
+  --shadow-dark: 0px 0px 6px -2px #111;
+  --font-título: "Roboto", sans-serif;
+  --font-text: "Open Sans", sans-serif;
+  --font-textprimario: "Work Sans", sans-serif;
+  --font-destaque: "Poppins", sans-serif;
+}
+
+body {
+  font-family: var(--font-textprimario);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-light);
+  color: var(--cor-do-bg);
+  font-size: 1rem;
+}

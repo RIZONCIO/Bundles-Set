@@ -1,0 +1,128 @@
+.footer-container {
+  background-color: var(--bg-header, #333);
+  color: var(--text-dark);
+  padding: 2.5rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.875rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 50rem;
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+
+.social-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  font-size: 1.5rem;
+  gap: 0.9375rem;
+}
+
+.social-block h3 {
+  margin-bottom: 0.625rem;
+  font-family: var(--font-título);
+  font-weight: 700;
+}
+
+.icons {
+  display: flex;
+  gap: 1.5625rem;
+}
+
+.icons a {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s;
+}
+
+.icons a:hover {
+  color: var(--cor-de-buttontrue);
+  transform: translateY(-0.3125rem);
+}
+
+.separator {
+  width: 0.125rem;
+  height: 9.375rem;
+  background-color: var(--litra-footer);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.site-links {
+  display: flex;
+  margin: 1.25rem 0 0 0;
+  gap: 1.25rem;
+}
+
+.site-links a {
+  color: var(--font-cor);
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.site-links a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0.125rem;
+  background-color: var(--cor-de-buttontrue);
+  position: absolute;
+  left: 0;
+  bottom: -0.3125rem;
+  transition: width 0.3s ease;
+}
+
+.site-links a:hover {
+  transform: translateY(-0.1875rem);
+}
+
+.site-links a:hover::after {
+  width: 100%;
+}
+
+.company {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  padding-top: 1.25rem;
+}
+
+@media (max-width: 425px) {
+  .footer-container {
+    padding: 1.25rem 0;
+    gap: 1.5rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding-bottom: 0px;
+  }
+
+  .social-block {
+    margin-top: 1rem;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .site-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 1rem 0rem 0rem;
+  }
+}

@@ -1,0 +1,157 @@
+.sobre-wrapper {
+  color: var(--font-cor);
+  text-align: center;
+  padding: 3.125rem 1.25rem;
+}
+
+.sobre-banner {
+  background: url("/img/steam-banner.png") no-repeat center center/cover;
+  padding: 80px 1.25rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sobre-texto {
+  max-width: 37.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.25rem;
+  border-radius: 0.625rem;
+  font-size: 1.8rem;
+}
+
+.sobre-texto h2 {
+  font-size: 2rem;
+  margin-bottom: 0.625rem;
+  font-family: var(--font-título);
+  font-weight: 600;
+}
+
+.sobre-texto p {
+  font-size: 1.2rem;
+  font-family: var(--font-text);
+}
+
+.sobre-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.sobre-texto i {
+  margin-bottom: 0.625rem;
+  color: var(--text-dark);
+}
+
+.info-item {
+  background: url("/img/steam-banner.png") no-repeat center center/cover;
+  padding: 1.25rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.info-item i {
+  margin-bottom: 0.625rem;
+  color: var(--text-dark);
+}
+
+.info-item img {
+  width: 3.125rem;
+  height: 3.125rem;
+  margin-bottom: 0.625rem;
+}
+
+.info-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem;
+  font-family: var(--font-título);
+  font-weight: 500;
+}
+
+.info-item p {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sobre-banner {
+    padding: 3.125rem 0.625rem;
+  }
+
+  .sobre-texto {
+    font-size: 1.5rem;
+  }
+
+  .sobre-texto h2 {
+    font-size: 1.5rem;
+  }
+
+  .sobre-texto p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .sobre-info {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+
+  .info-item {
+    font-size: 1.2rem;
+  }
+
+  .info-item:nth-child(3) {
+    grid-column: span 2;
+    max-width: 22.125rem;
+    justify-self: center;
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .sobre-banner {
+    padding: 2rem 0.5rem;
+    height: 7.5rem;
+  }
+
+  .sobre-texto {
+    font-size: 1.2rem;
+  }
+
+  .sobre-texto h2 {
+    font-size: 1.2rem;
+  }
+
+  .sobre-texto p {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .sobre-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    max-width: 17.5rem;
+    justify-self: center;
+    max-width: auto;
+  }
+
+  .info-item:nth-child(3) {
+    margin-top: 0px;
+  }
+
+  .info-item {
+    font-size: 1rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .info-item p {
+    font-size: 0.9rem;
+  }
+}

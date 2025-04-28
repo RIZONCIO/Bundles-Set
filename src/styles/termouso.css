@@ -1,0 +1,78 @@
+.termos {
+  color: var(--bg-dark);
+  margin: 0 6.2rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.termos h1 {
+  font-family: var(--font-título);
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.termos h2 {
+  font-family: var(--font-destaque);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.termos p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.termos strong {
+  font-weight: bold;
+}
+
+.termos ul {
+  list-style: none;
+  padding-left: 1.2rem;
+  font-weight: 500;
+}
+
+.termos ul li::marker {
+  content: "• ";
+  color: var(--bg-dark);
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .termos {
+    margin: 0 2rem;
+  }
+
+  .termos h1 {
+    font-size: 2.5rem;
+  }
+
+  .termos h2 {
+    font-size: 1.5rem;
+  }
+
+  .termos p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .termos {
+    margin: 0 1rem;
+  }
+
+  .termos h1 {
+    font-size: 2rem;
+  }
+
+  .termos h2 {
+    font-size: 1.25rem;
+  }
+
+  .termos p {
+    font-size: 0.875rem;
+  }
+}

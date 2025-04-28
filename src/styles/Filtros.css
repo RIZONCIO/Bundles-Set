@@ -1,0 +1,230 @@
+.filtro-container {
+  padding: 1.25rem;
+  color: white;
+  max-height: 50%;
+}
+
+.filtro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+}
+
+.resultados {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--bg-dark);
+  font-family: var(--font-destaque);
+}
+
+.listar-por {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--bg-dark);
+}
+
+.listar-por select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--bg-header, #333);
+  color: var(--font-cor);
+  font-family: var(--font-textprimario);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.listar-por option {
+  background-color: var(--bg-card);
+  color: var(--font-cor);
+}
+
+.filtros-wrapper {
+  display: flex;
+  gap: 0.9375rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filtro-item {
+  position: relative;
+}
+
+.filtro-btn {
+  background-color: var(--bg-header, #333);
+  color: var(--font-cor);
+  font-family: var(--font-textprimario);
+  font-weight: 500;
+  padding: 0.9375rem 1.5625rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.filtro-btn:hover {
+  background-color: var(--bg-card);
+}
+
+.filtro-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--bg-card);
+  color: var(--font-cor);
+  list-style: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.6875rem 0.9375rem;
+  min-width: 12.5rem;
+  max-height: 25rem;
+  overflow-y: auto;
+}
+
+.filtro-dropdown input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--bd-checkbox);
+  background: var(--cor-da-track);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  align-self: start;
+}
+
+.filtro-dropdown input[type="checkbox"]:checked {
+  background: var(--cor-checked);
+  border: 2px solid var(--cor-bd-checked);
+}
+
+.filtro-dropdown input[type="checkbox"]:hover {
+  background: var(--cor-hover-checked);
+}
+
+.filtro-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.filtro-dropdown::-webkit-scrollbar-track {
+  background: var(--cor-da-track);
+  border-radius: 0.625rem;
+}
+
+.filtro-dropdown::-webkit-scrollbar-thumb {
+  background: var(--cor-da-handle);
+  border-radius: 0.625rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.filtro-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--eft-do-track);
+}
+
+.filtro-dropdown.ativo {
+  display: block;
+}
+
+.filtro-dropdown li {
+  padding: 5px;
+}
+
+.filtro-dropdown label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.625rem;
+  cursor: pointer;
+  font-family: var(--font-textprimario);
+  font-size: 1rem;
+  color: var(--font-cor);
+}
+
+.filtro-dropdown span {
+  display: block;
+  word-break: break-word;
+  max-width: 12.5rem;
+}
+
+.filtro-dropdown input {
+  cursor: pointer;
+}
+
+.menu-hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--font-cor);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .filtros-wrapper {
+    gap: 0.625rem;
+  }
+
+  .filtro-btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .filtro-header {
+    gap: 15.3125rem;
+    margin: 0.625rem 1rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .filtros-wrapper {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .filtro-dropdown {
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+    width: 100vw;
+    background: #222;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px 10px 0 0;
+    overflow-y: auto;
+  }
+
+  .filtro-btn {
+    font-size: 0.9rem;
+    padding: 0.625rem 1rem;
+    text-align: center;
+  }
+
+  .filtro-header {
+    gap: 0rem;
+    margin: 0rem 0rem 1rem 0rem;
+  }
+
+  .resultados {
+    font-size: 0.8rem;
+  }
+
+  .listar-por {
+    font-size: 0.8rem;
+    gap: 0px;
+  }
+
+  .listar-por select {
+    padding: 0.375rem;
+    font-size: 0.8rem;
+  }
+}
