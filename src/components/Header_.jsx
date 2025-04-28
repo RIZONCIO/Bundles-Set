@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import DarkMode from './DarkMode'; 
 
 export default function Header_() {
   return (
@@ -9,9 +10,10 @@ export default function Header_() {
           Steam Bundle Set
           <img src="src/assets/img/logo2.png" alt="Logo" />
         </a>
-        <p>OI</p>
       </div>
-      <section id="dark-container"></section>
+      <section id="dark-container">
+        <DarkMode />
+      </section>
     </header>
-  )
+  );
 }
