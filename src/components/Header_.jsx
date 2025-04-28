@@ -11,6 +11,7 @@ export default function Header_() {
           <p>
             <span>Steam</span> Bundle Set
             <span>merge conflict test</span> Bundle Set 
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam necessitatibus delectus obcaecati neque mollitia, ex deleniti veritatis natus consequuntur eligendi unde cum odio asperiores ea, minus, nesciunt iusto? Optio, ex!
           </p>
         </a>
       </div>
