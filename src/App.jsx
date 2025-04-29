@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import './styles/reset.css';
 import './styles/style.css';
 import Header_ from './components/Header_';
+import Carousel from "./components/Carousel";
 
 export default function App() {
   return (

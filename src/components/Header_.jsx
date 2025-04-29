@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import DarkMode from './DarkMode'; 
 
 export default function Header_() {
   return (
@@ -10,7 +11,9 @@ export default function Header_() {
           <img src="src/assets/img/logo2.png" alt="Logo" />
         </a>
       </div>
-      <section id="dark-container"></section>
+      <section id="dark-container">
+        <DarkMode />
+      </section>
     </header>
-  )
+  );
 }
