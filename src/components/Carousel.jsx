@@ -1,11 +1,10 @@
-// Carousel.jsx
 import { useEffect, useState } from "react";
 import "../styles/Carousel.css"; 
 
 const images = [
-  { src: "src/assets/img/banner1.png", link: "#" },
-  { src: "src/assets/img/banner1.png", link: "#" },
-  { src: "src/assets/img/BannerGameFree2.png", link: "#" },
+  { src: "/img/banner1.png", link: "#" },
+  { src: "/img/banner1.png", link: "#" },
+  { src: "/img/BannerGameFree2.png", link: "#" },
 ];
 
 export default function Carousel() {
