@@ -71,6 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   pointer-events: none; /* Não interfere na interação com o input (Mathues Quando você for Aplicar função de botão para pesquisar editar!) */
 }
 
