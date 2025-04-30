@@ -40,7 +40,6 @@ export default function FiltroContainer() {
   return (
     <section className="filtro-container">
       <div className="filtro-header">
-        <span className="resultados">5784 resultados</span>
         <div className="listar-por">
           <span>Listar por:</span>
           <select>

@@ -1,16 +1,16 @@
 @import url("./Header.css");
 @import url("./Card.css");
 @import url("./Modal.css");
-@import url("./Buscardor.css");
+@import url("./Buscador.css");
 @import url("./Filtros.css");
 @import url("./Carousel.css");
 @import url("./Darkmode.css");
 @import url("./Footer.css");
 @import url("./buttonLoadMore.css");
-@import url("./StylesPage/Sobre.css");
-@import url("./StylesPage/Credito.css");
-@import url("./StylesPage/Termouso.css");
-@import url("./StylesPage/Doacao.css");
+@import url("./stylesPage/Sobre.css");
+@import url("./stylesPage/Credito.css");
+@import url("./stylesPage/Termouso.css");
+@import url("./stylesPage/Doacao.css");
 
 :root {
   --branco-neve: #e0e0e0;
