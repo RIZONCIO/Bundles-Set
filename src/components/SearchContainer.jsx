@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Buscador.css";
 import { fetchAllBundles } from "../hooks/useBundleApi";
 
@@ -7,6 +7,7 @@ export default function SearchContainer({ onSearchResults }) {
   const [isLoading, setIsLoading] = useState(false);
   const [bundles, setBundles] = useState([]);
   const [hasFetched, setHasFetched] = useState(false); // Para evitar múltiplos fetches
+  const [typingTimeout, setTypingTimeout] = useState(null); // Timeout para detectar pausa na digitação
 
   const loadBundles = async () => {
     if (hasFetched) return; // Evita múltiplas requisições
@@ -54,7 +55,19 @@ export default function SearchContainer({ onSearchResults }) {
 
     if (!value.trim()) {
       window.location.reload(); // Recarrega a página se o campo for limpo
+      return;
     }
+
+    // Limpa o timeout anterior e define um novo
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(() => {
+        handleSearch(); // Executa a busca após 3 segundos de inatividade
+      }, 3000)
+    );
   };
 
   return (
@@ -68,7 +81,7 @@ export default function SearchContainer({ onSearchResults }) {
           value={searchTerm}
           onFocus={loadBundles} // Carrega os bundles ao focar no campo
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress} 
         />
         <div className="search-icon" onClick={handleSearch}>
           {isLoading ? (
