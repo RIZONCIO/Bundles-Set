@@ -1,6 +1,6 @@
 const API_ENDPOINTS = {
-    BUNDLES: "https://steambundleapi.onrender.com/api/bundles-detailed",
-    BUNDLES_ALL: "https://steambundleapi.onrender.com/api/bundles-detailed-all",
+    BUNDLES: process.env.VITE_API_BUNDLES,
+    BUNDLES_ALL: process.env.VITE_API_BUNDLES_ALL,
   };
   
   export default API_ENDPOINTS;
