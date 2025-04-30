@@ -1,37 +1,77 @@
-import { useState, useEffect } from "react";
-import API_ENDPOINTS from "../config/api";
+import useBundleState from "./useBundleState";
+import { fetchBundles, fetchAllBundles } from "./useBundleApi";
+import { saveToIndexedDB, loadFromIndexedDB } from "../utils/indexedDB";
 
-const useFetchBundles = (limit = 20) => {
-    const [bundles, setBundles] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+export default function useFetchBundles() {
+  const {
+    bundles,
+    setBundles,
+    isLoading,
+    setIsLoading,
+    error,
+    setError,
+    hasMore,
+    setHasMore,
+    currentIndex,
+    setCurrentIndex,
+  } = useBundleState();
 
-    const fetchBundles = async (page = 1) => {
-        if (isLoading) return;
-        setIsLoading(true);
-        try {
-            const response = await fetch(`${API_ENDPOINTS.BUNDLES}?page=${page}&limit=${limit}`);
-            if (!response.ok) {
-                throw new Error("Erro ao buscar dados");
-            }
-            const data = await response.json();
-            setBundles((prevBundles) => [...prevBundles, ...data.bundles]);
-            setCurrentPage(data.page);
-            setTotalPages(data.totalPages);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  const loadBundles = async () => {
+    setIsLoading(true);
+    try {
+      const data = await fetchBundles();
+      setBundles(data.bundles);
+      setHasMore(data.bundles.length > 0);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    useEffect(() => {
-        fetchBundles(currentPage);
-    }, []);
+  const loadAllBundles = async () => {
+    setIsLoading(true);
+    try {
+      const data = await fetchAllBundles();
+      if (Array.isArray(data.bundles)) {
+        await saveToIndexedDB("allBundles", data.bundles);
+        setBundles(data.bundles.slice(0, 10));
+        setCurrentIndex(10);
+        setHasMore(data.bundles.length > 10);
+      } else {
+        setError("Erro ao processar os dados da API.");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    return { bundles, fetchBundles, currentPage, totalPages, isLoading, error };
-};
+  const loadMoreFromLocalStorage = async () => {
+    try {
+      const storedBundles = await loadFromIndexedDB("allBundles");
+      const nextBundles = storedBundles.slice(currentIndex, currentIndex + 10);
 
-export default useFetchBundles;
+      if (nextBundles.length > 0) {
+        setBundles((prev) => [...prev, ...nextBundles]);
+        setCurrentIndex((prev) => prev + 10);
+        setHasMore(currentIndex + 10 < storedBundles.length);
+      } else {
+        setHasMore(false);
+      }
+    } catch (err) {
+      setError("Erro ao carregar mais dados.");
+    }
+  };
+
+  return {
+    bundles,
+    loadBundles,
+    loadAllBundles,
+    loadMoreFromLocalStorage,
+    isLoading,
+    error,
+    hasMore,
+  };
+}

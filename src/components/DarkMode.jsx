@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 export default function DarkMode() {
   const [isDark, setIsDark] = useState(false);
 
-  // Função para alternar o tema
   function switchTheme(isDarkMode) {
     const root = document.documentElement;
     if (isDarkMode) {
@@ -17,7 +16,6 @@ export default function DarkMode() {
     }
   }
 
-  // Carregar a preferência do tema ao montar o componente
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const isDarkMode = savedTheme === 'dark';
@@ -25,7 +23,6 @@ export default function DarkMode() {
     switchTheme(isDarkMode);
   }, []);
 
-  // Alternar o tema ao clicar no botão
   function handleToggle(e) {
     const checked = e.target.checked;
     setIsDark(checked);

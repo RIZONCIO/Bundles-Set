@@ -1,19 +1,21 @@
 import { useEffect } from "react";
 
-const useInfiniteScroll = (callback, isLoading, hasMore) => {
+export default function useInfiniteScroll(callback, isLoading, hasMore) {
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const documentHeight = document.body.offsetHeight;
-
-      if (scrollPosition >= documentHeight - 500 && !isLoading && hasMore) {
-        callback();
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 100 &&
+        !isLoading &&
+        hasMore
+      ) {
+        if (typeof callback === "function") {
+          callback();
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [callback, isLoading, hasMore]); 
-};
-
-export default useInfiniteScroll;
+  }, [callback, isLoading, hasMore]);
+}
