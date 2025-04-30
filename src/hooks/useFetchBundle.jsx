@@ -32,7 +32,7 @@ export default function useFetchBundles() {
   const loadAllBundles = async () => {
     setIsLoading(true);
     try {
-      const data = await fetchAllBundles();
+      const data = await fetchAllBundles(); 
       if (Array.isArray(data.bundles)) {
         await saveToIndexedDB("allBundles", data.bundles);
         setBundles(data.bundles.slice(0, 10));
