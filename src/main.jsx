@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './AppRoutes'; 
+import AppRoutes from './AppRoutes';
+import { initializeIndexedDB } from './utils/indexedDB'; 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+initializeIndexedDB()
+  .then(() => {
+    console.log('IndexedDB inicializado com sucesso.');
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </React.StrictMode>
+    );
+  })
+  .catch((error) => {
+    console.error('Erro ao inicializar IndexedDB:', error);
+  });

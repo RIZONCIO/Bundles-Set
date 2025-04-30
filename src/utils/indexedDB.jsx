@@ -4,23 +4,32 @@ export const saveToIndexedDB = (key, data) => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains("allBundles")) { // Alterado para "allBundles"
+      console.log("onupgradeneeded: Inicializando IndexedDB...");
+      if (!db.objectStoreNames.contains("allBundles")) {
         db.createObjectStore("allBundles", { keyPath: "key" });
+        console.log("Object store 'allBundles' criado com sucesso.");
       }
     };
 
     request.onsuccess = (event) => {
       const db = event.target.result;
-      const transaction = db.transaction("allBundles", "readwrite"); // Alterado para "allBundles"
+      console.log("onsuccess: IndexedDB aberto com sucesso.");
+      const transaction = db.transaction("allBundles", "readwrite");
       const store = transaction.objectStore("allBundles");
 
       store.put({ key, data });
 
-      transaction.oncomplete = () => resolve();
+      transaction.oncomplete = () => {
+        console.log("Dados salvos com sucesso no IndexedDB.");
+        resolve();
+      };
       transaction.onerror = (err) => reject(err);
     };
 
-    request.onerror = (err) => reject(err);
+    request.onerror = (err) => {
+      console.error("Erro ao abrir IndexedDB:", err);
+      reject(err);
+    };
   });
 };
 
@@ -30,7 +39,7 @@ export const loadFromIndexedDB = (key) => {
 
     request.onsuccess = (event) => {
       const db = event.target.result;
-      const transaction = db.transaction("allBundles", "readonly"); // Alterado para "allBundles"
+      const transaction = db.transaction("allBundles", "readonly");
       const store = transaction.objectStore("allBundles");
 
       const getRequest = store.get(key);
@@ -40,5 +49,30 @@ export const loadFromIndexedDB = (key) => {
     };
 
     request.onerror = (err) => reject(err);
+  });
+};
+
+export const initializeIndexedDB = () => {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("BundlesDB", 1);
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      console.log("Inicializando IndexedDB...");
+      if (!db.objectStoreNames.contains("allBundles")) {
+        db.createObjectStore("allBundles", { keyPath: "key" });
+        console.log("Object store 'allBundles' criado.");
+      }
+    };
+
+    request.onsuccess = (event) => {
+      console.log("IndexedDB inicializado com sucesso.");
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      console.error("Erro ao inicializar IndexedDB:", event.target.error);
+      reject(event.target.error);
+    };
   });
 };
