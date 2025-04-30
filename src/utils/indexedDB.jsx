@@ -58,15 +58,15 @@ export const initializeIndexedDB = () => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      console.log("Inicializando IndexedDB...");
+      console.log("onupgradeneeded: Inicializando IndexedDB...");
       if (!db.objectStoreNames.contains("allBundles")) {
         db.createObjectStore("allBundles", { keyPath: "key" });
-        console.log("Object store 'allBundles' criado.");
+        console.log("Object store 'allBundles' criado com sucesso.");
       }
     };
 
     request.onsuccess = (event) => {
-      console.log("IndexedDB inicializado com sucesso.");
+      console.log("onsuccess: IndexedDB aberto com sucesso.");
       resolve(event.target.result);
     };
 
