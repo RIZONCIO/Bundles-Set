@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchContainer from "./components/SearchContainer";
 import BannerOferta from "./components/BannerOferta";
 import FiltroContainer from "./components/FiltroContainer";
@@ -39,17 +39,28 @@ export default function App() {
 
   useInfiniteScroll(handleInfiniteScroll, isLoading, hasMore);
 
+  const [filteredBundles, setFilteredBundles] = useState([]); 
+
+  const handleSearchResults = (results) => {
+    setFilteredBundles(results); 
+  };
+
   return (
     <div className="app">
       <Header_ />
       <main>
         <BannerOferta />
-        <SearchContainer />
+        <SearchContainer onSearchResults={handleSearchResults} />
         <FiltroContainer />
         <CardsContainer />
         <Pagination />
         {error && <p style={{ color: "red" }}>Erro ao carregar bundles: {error}</p>}
-        <DisplayBundles data={{ bundles, totalBundles: bundles.length }} />
+        <DisplayBundles
+          data={{
+            bundles: filteredBundles.length > 0 ? filteredBundles : bundles, 
+            totalBundles: filteredBundles.length > 0 ? filteredBundles.length : bundles.length,
+          }}
+        />
         {isLoading && <p>Carregando...</p>}
         {!infiniteScrollEnabled && (
           <button

@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/Footer.css';
+import React from "react";
+import "../styles/Footer.css";
 
 function SocialBlock({ title, links }) {
   return (
@@ -41,10 +41,10 @@ export default function Footer() {
           <SocialBlock title="RIZONCIO" links={devTwoLinks} />
         </div>
         <div className="site-links">
-          <a href="/page/Sobre.html">Sobre</a>
-          <a href="/page/TermoUso.html">Termos de Uso</a>
+          <a href="/sobre">Sobre</a>
+          <a href="/termos-uso">Termos de Uso</a> 
           <a href="#">Política de Privacidade</a>
-          <a href="/page/Doacao.html">Doação</a>
+          <a href="#">Doação</a>
         </div>
         <div className="company">
           © 2025 Nome da Empresa. Todos os direitos reservados.

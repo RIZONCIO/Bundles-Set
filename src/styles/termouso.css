@@ -4,24 +4,31 @@
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.5rem; 
+  background-color: #f9f9f9; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .termos h1 {
   font-family: var(--font-título);
   font-size: 3rem;
   font-weight: 900;
+  color: var(--primary-color); /* Cor principal */
+  text-align: center; /* Centralizado */
 }
 
 .termos h2 {
   font-family: var(--font-destaque);
   font-size: 1.75rem;
   font-weight: 700;
+  color: var(--secondary-color); /* Cor secundária */
 }
 
 .termos p {
   font-size: 1rem;
   font-weight: 500;
+  line-height: 1.6; 
 }
 
 .termos strong {
