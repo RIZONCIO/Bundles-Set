@@ -6,6 +6,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  base: './', 
   server: {
     hmr: true,
   },
@@ -14,5 +15,4 @@ export default defineConfig({
       '@': '/src',
     },
   },
-  base: './', 
 });
