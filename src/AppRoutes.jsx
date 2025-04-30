@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Sobre from "./components/Sobre"; 
+import Sobre from "./pages/Sobre"; 
 import App from "./App";
 import TermosUso from "./pages/TermosUso"; 
 

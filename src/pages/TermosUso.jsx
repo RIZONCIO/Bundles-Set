@@ -1,14 +1,16 @@
 import React from "react";
-import "../styles/termouso.css";
+import "../styles/style.css";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../components/buttons/BackButton";
+import Header_ from "../components/Header_";
+import Footer from "../components/Footer";
 export default function TermosUso() {
 
     const navigate = useNavigate();
 
     return (
+        <>
+        <Header_ />
         <section className="termos">
-            <BackButton />
             <h1>Termos de Uso do Steam Bundle Set</h1>
             <p>
                 Bem-vindo ao Steam Bundle Set! Ao acessar e utilizar este site, você
@@ -136,6 +138,11 @@ export default function TermosUso() {
             </p>
 
             <p>Data de entrada em vigor: 13/03/2025</p>
+
         </section>
+        <Footer />
+        </>
     );
+
 }
+

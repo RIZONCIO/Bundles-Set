@@ -5,7 +5,7 @@ export default function Header_() {
   return (
     <header className="header">
       <div className="title-container">
-        <a href="#">
+        <a href="/" >
           <img src="/img/logo2.png" alt="Logo" />
           Steam Bundle Set
           <img src="/img/logo2.png" alt="Logo" />
