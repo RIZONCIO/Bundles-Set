@@ -13,8 +13,12 @@ export default function SearchContainer({ onSearchResults }) {
     setIsLoading(true);
     try {
       const data = await fetchAllBundles();
-      setBundles(data.bundles);
-      setHasFetched(true); // Marca que os dados já foram carregados
+      if (data && Array.isArray(data.bundles)) {
+        setBundles(data.bundles);
+        setHasFetched(true); // Marca que os dados já foram carregados
+      } else {
+        console.error("Dados inválidos retornados pela API.");
+      }
     } catch (error) {
       console.error("Erro ao carregar bundles:", error);
     } finally {
@@ -25,8 +29,15 @@ export default function SearchContainer({ onSearchResults }) {
   const handleSearch = () => {
     if (!searchTerm.trim()) return; // Evita buscas vazias
 
-    const filteredBundles = bundles.filter((bundle) =>
-      bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
+    if (bundles.length === 0) {
+      console.warn("Nenhum bundle carregado para pesquisar.");
+      return;
+    }
+
+    const filteredBundles = bundles.filter(
+      (bundle) =>
+        bundle.name &&
+        bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     onSearchResults(filteredBundles);
   };
