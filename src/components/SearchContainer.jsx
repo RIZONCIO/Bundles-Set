@@ -5,24 +5,30 @@ import { fetchAllBundles } from "../hooks/useBundleApi";
 export default function SearchContainer({ onSearchResults }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [bundles, setBundles] = useState([]);
+  const [hasFetched, setHasFetched] = useState(false); // Para evitar múltiplos fetches
 
-  const handleSearch = async () => {
-    if (!value.trim()){
-      window.location.reload();
-    }
-    
+  const loadBundles = async () => {
+    if (hasFetched) return; // Evita múltiplas requisições
     setIsLoading(true);
     try {
       const data = await fetchAllBundles();
-      const filteredBundles = data.bundles.filter((bundle) =>
-        bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      onSearchResults(filteredBundles);
+      setBundles(data.bundles);
+      setHasFetched(true); // Marca que os dados já foram carregados
     } catch (error) {
-      console.error("Erro ao buscar bundles:", error);
+      console.error("Erro ao carregar bundles:", error);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return; // Evita buscas vazias
+
+    const filteredBundles = bundles.filter((bundle) =>
+      bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    onSearchResults(filteredBundles);
   };
 
   const handleKeyPress = (event) => {
@@ -31,7 +37,14 @@ export default function SearchContainer({ onSearchResults }) {
     }
   };
 
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
 
+    if (!value.trim()) {
+      window.location.reload(); // Recarrega a página se o campo for limpo
+    }
+  };
 
   return (
     <section className="search-container">
@@ -42,7 +55,8 @@ export default function SearchContainer({ onSearchResults }) {
           className="search-input"
           placeholder="Busque por bundles..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onFocus={loadBundles} // Carrega os bundles ao focar no campo
+          onChange={handleInputChange}
           onKeyPress={handleKeyPress}
         />
         <div className="search-icon" onClick={handleSearch}>
