@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/sobre.css";
+import "../styles/Sobre.css";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./buttons/BackButton";
 
