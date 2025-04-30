@@ -5,27 +5,19 @@ import { fetchAllBundles } from "../hooks/useBundleApi";
 export default function SearchContainer({ onSearchResults }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [warning, setWarning] = useState(""); // Estado para exibir avisos
 
   const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
-
-    if (searchTerm.length === 1) {
-      setWarning("Buscas com uma única letra podem retornar muitos resultados.");
-    } else {
-      setWarning(""); // Limpa o aviso se a busca for válida
+    if (!value.trim()){
+      window.location.reload();
     }
-
+    
     setIsLoading(true);
     try {
       const data = await fetchAllBundles();
       const filteredBundles = data.bundles.filter((bundle) =>
         bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-
-      // Limita o número de resultados exibidos inicialmente
-      const limitedResults = filteredBundles.slice(0, 50); // Exibe até 50 resultados
-      onSearchResults(limitedResults);
+      onSearchResults(filteredBundles);
     } catch (error) {
       console.error("Erro ao buscar bundles:", error);
     } finally {
@@ -39,14 +31,7 @@ export default function SearchContainer({ onSearchResults }) {
     }
   };
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
 
-    if (!value.trim()) {
-      window.location.reload();
-    }
-  };
 
   return (
     <section className="search-container">
@@ -57,7 +42,7 @@ export default function SearchContainer({ onSearchResults }) {
           className="search-input"
           placeholder="Busque por bundles..."
           value={searchTerm}
-          onChange={handleInputChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onKeyPress={handleKeyPress}
         />
         <div className="search-icon" onClick={handleSearch}>
@@ -70,7 +55,6 @@ export default function SearchContainer({ onSearchResults }) {
           )}
         </div>
       </div>
-      {warning && <p className="warning">{warning}</p>} {/* Exibe o aviso */}
     </section>
   );
 }
