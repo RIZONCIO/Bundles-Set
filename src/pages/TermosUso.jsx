@@ -124,14 +124,26 @@ export default function TermosUso() {
                 os Termos de Uso para se manter informado sobre eventuais mudanças.
             </p>
 
-            <h2>10. Lei Aplicável</h2>
+            <h2>10. Variações de Preços</h2>
+            <p>
+                Os preços exibidos nos cards dos bundles podem não refletir o valor exato no momento do acesso. Isso ocorre porque:
+            </p>
+                <ul>
+                    <li>Os valores podem variar conforme a conta do usuário Steam, especialmente se ele já possuir um ou mais jogos do pacote (o que pode reduzir o preço final).</li>
+                    <li>Nosso sistema não realiza atualização de preços em tempo real, devido a limitações de servidor e recursos. Os dados são coletados em intervalos e podem ficar desatualizados por algumas horas.</li>
+                </ul>
+            <p>
+                Recomendamos que o usuário sempre verifique o preço final diretamente na página do bundle na Steam antes de efetuar qualquer compra.
+            </p>
+
+            <h2>11. Lei Aplicável</h2>
             <p>
                 Estes Termos de Uso são regidos pelas leis do <strong>Brasil</strong> e
                 quaisquer disputas relacionadas ao uso do site serão resolvidas nos
                 tribunais competentes dessa localidade.
             </p>
 
-            <h2>11. Contato</h2>
+            <h2>12. Contato</h2>
             <p>
                 Se você tiver dúvidas ou preocupações sobre estes Termos de Uso, entre
                 em contato conosco através das nossas redes sociais no footer.

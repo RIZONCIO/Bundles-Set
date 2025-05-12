@@ -11,6 +11,7 @@
 @import url("./stylesPage/Credito.css");
 @import url("./stylesPage/Termouso.css");
 @import url("./stylesPage/Doacao.css");
+@import url("./stylesPage/Gratis.css");
 
 :root {
   --branco-neve: #e0e0e0;

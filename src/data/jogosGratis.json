@@ -1,0 +1,59 @@
+[
+    {
+      "id": 1,
+      "nome": "Counter-Strike: Global Offensive",
+      "resumo": "Um clássico FPS competitivo gratuito com modos intensos.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg",
+      "link": "https://store.steampowered.com/app/730/"
+    },
+    {
+      "id": 2,
+      "nome": "Dota 2",
+      "resumo": "Um MOBA tático de batalhas épicas entre equipes.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+      "link": "https://store.steampowered.com/app/570/"
+    },
+    {
+      "id": 3,
+      "nome": "Warframe",
+      "resumo": "FPS cooperativo com ninjas espaciais em guerras interplanetárias.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/230410/header.jpg",
+      "link": "https://store.steampowered.com/app/230410/"
+    },
+    {
+      "id": 4,
+      "nome": "Team Fortress 2",
+      "resumo": "Jogo de tiro divertido com classes e modos variados.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg",
+      "link": "https://store.steampowered.com/app/440/"
+    },
+    {
+      "id": 5,
+      "nome": "Destiny 2",
+      "resumo": "FPS online de ficção científica com mundo aberto.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg",
+      "link": "https://store.steampowered.com/app/1085660/"
+    },
+    {
+      "id": 6,
+      "nome": "Paladins",
+      "resumo": "FPS com heróis únicos e combate em equipe.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/444090/header.jpg",
+      "link": "https://store.steampowered.com/app/444090/"
+    },
+    {
+      "id": 7,
+      "nome": "Realm Royale Reforged",
+      "resumo": "Battle Royale com classes mágicas e forjas.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/813820/header.jpg",
+      "link": "https://store.steampowered.com/app/813820/"
+    },
+    {
+      "id": 8,
+      "nome": "Crab Game",
+      "resumo": "Minijogos insanos estilo Round 6 com multiplayer.",
+      "imagem": "https://cdn.cloudflare.steamstatic.com/steam/apps/1782210/header.jpg",
+      "link": "https://store.steampowered.com/app/1782210/"
+    }
+  ]
+  

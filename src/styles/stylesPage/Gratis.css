@@ -1,0 +1,202 @@
+.titulo-principal {
+  text-align: center;
+  font-size: 3rem;
+  margin: 1.5rem 0 2rem 0;
+  font-weight: bold;
+  color: var(--bg-dark);
+  font-family: var(--font-destaque);
+}
+
+.container-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-jogo {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+  height: 25rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 0.125rem solid var(--bg-dark);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--bg-card);
+}
+
+.card-jogo:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.5rem 1rem var(--brilho-azul);
+}
+
+.imagem-jogo {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  border-radius: 0.75rem;
+  transition: transform 0.5s ease;
+}
+
+.info-jogo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-jogo:hover .info-jogo {
+  opacity: 1;
+}
+
+.badge-gratis {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background-color: var(--cor-de-buttontrue);
+  font-family: var(--font-destaque);
+  color: var(--bg-card);
+  padding: 0.375rem 0.75rem;
+  font-size: 1.125rem;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.titulo-jogo {
+  font-size: 1.875rem;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-family: var(--font-título);
+  color: var(--branco-neve);
+}
+
+.resumo-jogo {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: var(--font-cor);
+}
+
+.botao-steam {
+  align-self: flex-end;
+  background-color: var(--cor-de-buttontrue);
+  color: var(--bg-card);
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  margin-top: 0.75rem;
+}
+
+.botao-steam:hover {
+  background-color: var(--cor-de-buttontrue);
+  color: var(--bg-header);
+  border-color: var(--cor-de-buttontrue);
+  box-shadow: 0 0.25rem 0.75rem var(--brilho-azul);
+}
+
+@media (max-width: 1024px) {
+  .titulo-principal {
+    font-size: 2.5rem;
+  }
+
+  .card-jogo {
+    height: 22rem;
+  }
+
+  .titulo-jogo {
+    font-size: 1.5rem;
+  }
+
+  .resumo-jogo {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo-principal {
+    font-size: 2rem;
+  }
+
+  .container-cards {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .card-jogo {
+    height: auto;
+    max-width: 90%;
+  }
+
+  .info-jogo {
+    padding: 1rem;
+  }
+
+  .titulo-jogo {
+    font-size: 1.375rem;
+  }
+
+  .resumo-jogo {
+    font-size: 0.875rem;
+  }
+
+  .badge-gratis {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.625rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .titulo-principal {
+    font-size: 1.75rem;
+  }
+
+  .container-cards {
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .card-jogo {
+    height: auto;
+    max-width: 90%;
+    border-radius: 0.5rem;
+    border-width: 1px;
+  }
+  .imagem-jogo {
+    border-radius: 0.5rem;
+  }
+
+  .info-jogo {
+    padding: 0.5rem;
+  }
+
+  .botao-steam {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  .titulo-jogo {
+    font-size: 1.25rem;
+  }
+
+  .resumo-jogo {
+    font-size: 0.8125rem;
+  }
+
+  .badge-gratis {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}

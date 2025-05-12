@@ -43,11 +43,11 @@ export default function Footer() {
         <div className="site-links">
           <a href="/sobre">Sobre</a>
           <a href="/termos-uso">Termos de Uso</a> 
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Doação</a>
+          <a href="/política-privacidade">Política de Privacidade</a>
+          <a href="/doacao">Doação</a>
         </div>
         <div className="company">
-          © 2025 Nome da Empresa. Todos os direitos reservados.
+          © 2025 SteamBundleSet. Todos os direitos reservados.
         </div>
       </section>
     </footer>

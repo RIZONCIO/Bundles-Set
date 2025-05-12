@@ -3,7 +3,6 @@ import '../styles/Filtros.css';
 
 export default function FiltroContainer() {
   const [dropdownAberto, setDropdownAberto] = useState(null);
-  const [menuAberto, setMenuAberto] = useState(false);
   const filtrosWrapperRef = useRef(null);
 
   const filtros = {
@@ -51,10 +50,7 @@ export default function FiltroContainer() {
         </div>
       </div>
 
-      <div
-        className={`filtros-wrapper ${menuAberto ? 'ativo' : ''}`}
-        ref={filtrosWrapperRef}
-      >
+      <div className="filtros-wrapper" ref={filtrosWrapperRef}>
         {Object.entries(filtros).map(([titulo, opcoes]) => (
           <div className="filtro-item" key={titulo}>
             <button
@@ -64,7 +60,22 @@ export default function FiltroContainer() {
                 setDropdownAberto(dropdownAberto === titulo ? null : titulo);
               }}
             >
-              {titulo} ▼
+              {titulo}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{ marginLeft: '6px', verticalAlign: 'middle' }}
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
             <ul className={`filtro-dropdown ${dropdownAberto === titulo ? 'ativo' : ''}`}>
               {opcoes.map((opcao) => (
@@ -79,13 +90,6 @@ export default function FiltroContainer() {
           </div>
         ))}
       </div>
-
-      <button
-        className="menu-hamburguer"
-        onClick={() => setMenuAberto(!menuAberto)}
-      >
-        ☰
-      </button>
     </section>
   );
 }
