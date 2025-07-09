@@ -12,6 +12,7 @@
 @import url("./stylesPage/Termouso.css");
 @import url("./stylesPage/Doacao.css");
 @import url("./stylesPage/Gratis.css");
+@import url("./stylesPage/Evento.css");
 
 :root {
   --branco-neve: #e0e0e0;
@@ -43,6 +44,7 @@
   --bg-mode-dark: #151515;
   --text-light: #424242;
   --text-dark: #fff;
+  --text-verde: #00ffae;
   --switch-bg-light: #fff;
   --switch-bg-dark: #3c3c3c;
   --shadow-light: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;

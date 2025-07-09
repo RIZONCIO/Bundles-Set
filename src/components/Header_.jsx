@@ -8,7 +8,7 @@ export default function Header_() {
         <a href="/" >
           <img src="/img/logo2.png" alt="Logo" />
           Steam Bundle Set
-          <img src="/img/logo2.png" alt="Logo" />
+          <img src="/img/logo2.png" alt="Logo" className="logo-mobile-hide" />
         </a>
       </div>
       <section id="dark-container">

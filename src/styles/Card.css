@@ -47,6 +47,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 0.625rem;
+  gap: 4.5rem;
 }
 
 .preco {
@@ -88,12 +89,20 @@
     margin: 0;
     padding: 1.25rem;
   }
+
+  .card .preco-btn-container {
+    gap: 1rem;
+  }
 }
 @media (min-width: 375px) {
   .cards-container {
     max-width: none;
     margin: 0 1rem;
     padding: 1.25rem;
+  }
+
+  .card .preco-btn-container {
+    gap: 2rem;
   }
 }
 
@@ -109,7 +118,12 @@
   .card img {
     height: auto;
   }
+
+  .card .preco-btn-container {
+    gap: 5.2rem;
+  }
 }
+
 @media (min-width: 1024px) {
   .cards-container {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -117,5 +131,9 @@
 
   .card img {
     height: 15rem;
+  }
+
+  .card .preco-btn-container {
+    gap: 12rem;
   }
 }

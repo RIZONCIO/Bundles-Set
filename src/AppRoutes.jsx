@@ -5,13 +5,15 @@ import App from "./App";
 import TermosUso from "./pages/TermosUso"; 
 import Doacao from "./pages/Doacao";
 import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
-import Gratis from "./pages/Gratis"; // Página inicial
+import Gratis from "./pages/Gratis";
+import Evento from "./pages/Evento"; // Importando a página Evento
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<App />} /> {/* Página principal */}
       <Route path="/free" element={<Gratis />} /> {/* Página de jogos gratis*/}
+      <Route path="/evento" element={<Evento />} /> {/* Página de Eventos da Steam*/}
       <Route path="/sobre" element={<Sobre />} /> {/* Página about */}
       <Route path="/termos-uso" element={<TermosUso />} /> {/* Página Termos de Uso */}
       <Route path="/política-privacidade" element={<PoliticaPrivacidade />} /> {/* Politica de Privacidade */}

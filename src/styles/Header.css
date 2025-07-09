@@ -103,3 +103,13 @@
     display: none;
   }
 }
+
+@media (max-width: 320px) {
+  .logo-mobile-hide {
+    display: none;
+  }
+
+  .header {
+    gap: 0.5rem;
+  }
+}
