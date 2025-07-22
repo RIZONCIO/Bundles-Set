@@ -50,6 +50,58 @@
   gap: 4.5rem;
 }
 
+.precos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.preco-original {
+  font-size: 0.9rem;
+  color: var(--font-cor);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.preco {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--preco-cor);
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.03rem;
+}
+
+.desconto {
+  background: #4ade80;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+.bundle-details {
+  margin-top: 0.75rem;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.genre-tag {
+  background: var(--cor-de-buttontrue);
+  color: var(--bg-card);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
 .preco {
   font-size: 1.125rem;
   font-weight: bold;
