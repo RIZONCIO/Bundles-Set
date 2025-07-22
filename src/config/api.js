@@ -1,6 +1,6 @@
 const API_ENDPOINTS = {
-  BUNDLES: import.meta.env.VITE_API_BUNDLES,
-  BUNDLES_ALL: import.meta.env.VITE_API_BUNDLES_ALL,
+  BUNDLES: import.meta.env.VITE_API_URL,
+  BUNDLES_ALL: import.meta.env.VITE_API_URL,
 };
 
 export default API_ENDPOINTS;
