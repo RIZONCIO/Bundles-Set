@@ -14,7 +14,7 @@ export default function Credito() {
     const digitarTexto = () => {
       if (indexRef.current < texto.length) {
         textoRef.current += texto[indexRef.current];
-        setMostrarTexto(textoRef.current); // apenas renderiza o que acumulou
+        setMostrarTexto(textoRef.current); 
         indexRef.current++;
         setTimeout(digitarTexto, 100);
       } else {

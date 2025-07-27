@@ -1,6 +1,6 @@
+@import url("./reset.css");
 @import url("./Header.css");
 @import url("./Card.css");
-@import url("./Modal.css");
 @import url("./Buscador.css");
 @import url("./Filtros.css");
 @import url("./Carousel.css");
@@ -15,44 +15,103 @@
 @import url("./stylesPage/Evento.css");
 
 :root {
-  --branco-neve: #e0e0e0;
+  /* === Paleta Base === */
   --bg-dark: #121212;
   --bg-light: #e8e8e8;
-  --bg-header: #171a21;
-  --cor-bordar: #121417;
-  --cor-do-bg: #121212;
-  --bg-card: #1f1f1f;
-  --font-cor: #c7d5e0;
-  --font-cor2: rgba(255, 255, 0, 0.952);
-  --neon-efc: rgba(255, 226, 76, 0.8), 0 0 10px rgba(255, 226, 76, 0.7),
-    0 0 20px rgba(255, 226, 76, 0.6), 0 0 40px rgba(255, 226, 76, 0.5);
-  --bordar-cinza: #d1d5db;
-  --cor-de-buttontrue: #66c0f4;
-  --preco-cor: #00e205;
-  --cmd-cor: #00ff00;
-  --brilho-azul: rgb(102, 192, 244, 0.8);
-  --cor-de-buttonfalse: #e6796c;
-  --cor-da-track: rgba(255, 255, 255, 0.1);
-  --cor-da-handle: rgba(255, 255, 255, 0.4);
-  --eft-do-track: rgba(255, 255, 255, 0.6);
-  --bd-checkbox: rgba(255, 255, 255, 0.5);
-  --cor-checked: rgb(102, 192, 244, 0.8);
-  --cor-bd-checked: rgba(255, 255, 255, 1);
-  --cor-hover-checked: rgba(255, 255, 255, 0.3);
-  --litra-footer: rgba(201, 201, 201, 0.479);
   --bg-mode-light: #e0e0e0;
   --bg-mode-dark: #151515;
+
+  /* === Cores de Texto === */
+  --font-cor: #c7d5e0;
+  --font-cor2: rgba(255, 255, 0, 0.952);
   --text-light: #424242;
-  --text-dark: #fff;
-  --text-verde: #00ffae;
-  --switch-bg-light: #fff;
-  --switch-bg-dark: #3c3c3c;
+  --text-verde-evento: #00ffae;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-accent: #00d4ff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --cmd-cor: #00ff00;
+
+  /* === Superfícies Dark === */
+  --dark-surface-1: #1a1a2e;
+  --dark-surface-2: #16213e;
+  --dark-surface-3: #0f3460;
+
+  /* === Bordas e Sombra === */
+  --bordar-cinza: #d1d5db;
   --shadow-light: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;
   --shadow-dark: 0px 0px 6px -2px #111;
+
+  /* === Gradientes === */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+
+  /* === Neon === */
+  --neon-blue: #00d4ff;
+  --neon-purple: #b347d9;
+  --neon-pink: #ff006e;
+  --neon-green: #39ff14;
+  --neon-efc: rgba(255, 226, 76, 0.8), 0 0 10px rgba(255, 226, 76, 0.7),
+    0 0 20px rgba(255, 226, 76, 0.6), 0 0 40px rgba(255, 226, 76, 0.5);
+
+  /* === Glassmorphism (Dark Mode) === */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --glass-backdrop: blur(10px);
+
+  /* === Glass Hover States === */
+  --glass-hover-bg: rgba(255, 255, 255, 0.15);
+  --glass-hover-border: rgba(255, 255, 255, 0.3);
+  --glass-hover-shadow: rgba(0, 0, 0, 0.2);
+
+  /* === Variáveis para temas / componentes === */
+  --card-text-primary: var(--text-primary);
+  --card-text-secondary: var(--text-secondary);
+  --card-glass-bg: var(--glass-bg);
+  --card-glass-border: var(--glass-border);
+  --card-glass-shadow: var(--glass-shadow);
+  --card-glass-hover-bg: var(--glass-hover-bg);
+  --card-glass-hover-border: var(--glass-hover-border);
+
+  /* === Switch Theme === */
+  --switch-bg-light: #fff;
+  --switch-bg-dark: #3c3c3c;
+
+  /* === Ícones e Hover === */
+  --svg-lupa-hover: #1f1f1f;
+
+  /* === Fontes === */
   --font-título: "Roboto", sans-serif;
   --font-text: "Open Sans", sans-serif;
   --font-textprimario: "Work Sans", sans-serif;
   --font-destaque: "Poppins", sans-serif;
+  --font-tag: "Sansation", sans-serif;
+}
+
+[data-theme="light"],
+body.light-mode {
+  --card-glass-bg: rgba(255, 255, 255, 0.7);
+  --card-glass-border: rgba(255, 255, 255, 0.8);
+  --card-glass-shadow: rgba(0, 0, 0, 0.08);
+
+  --card-glass-hover-bg: rgba(255, 255, 255, 0.85);
+  --card-glass-hover-border: rgba(255, 255, 255, 0.9);
+  --card-glass-hover-shadow: rgba(0, 0, 0, 0.12);
+
+  --card-text-primary: #1a1a2e;
+  --card-text-secondary: rgba(26, 26, 46, 0.8);
+  --card-text-accent: #0066cc;
+  --card-text-muted: rgba(26, 26, 46, 0.6);
+
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
 
 body {

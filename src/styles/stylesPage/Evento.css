@@ -5,6 +5,7 @@
   align-items: center;
   background-color: var(--bg-light);
   color: var(--font-cor);
+  margin: 10rem auto;
 }
 
 .titulo-eventos {
@@ -34,7 +35,7 @@
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.063rem;
-  color: var(--text-verde);
+  color: var(--text-verde-evento);
   background-color: #1e1e1e;
   border-bottom: 0.125rem solid rgba(255, 255, 255, 0.1);
 }

@@ -1,182 +1,460 @@
 .filtro-container {
   padding: 1.25rem;
-  color: white;
-  max-height: 50%;
+  color: var(--card-text-primary);
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .filtro-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-glass-border);
 }
 
 .resultados {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: var(--bg-dark);
+  color: var(--card-text-primary);
   font-family: var(--font-destaque);
 }
 
 .listar-por {
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: var(--bg-dark);
+  gap: 10px;
+  color: var(--card-text-secondary);
+  font-size: 0.95rem;
+}
+
+.listar-por span {
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--card-text-primary);
 }
 
 .listar-por select {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: none;
-  background-color: var(--bg-header, #333);
-  color: var(--font-cor);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--card-glass-border);
+  background-color: var(--card-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--card-text-primary);
   font-family: var(--font-textprimario);
-  font-weight: 600;
-  border: none;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+.listar-por select:hover {
+  border-color: var(--text-accent);
+  background-color: var(--card-glass-hover-bg);
+}
+
+.listar-por select:focus {
+  outline: none;
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
 }
 
 .listar-por option {
-  background-color: var(--bg-card);
-  color: var(--font-cor);
+  background-color: var(--card-glass-bg);
+  color: var(--card-text-primary);
+  padding: 0.5rem;
 }
 
 .filtros-wrapper {
   display: flex;
-  gap: 0.9375rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
+  min-height: 50px;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 60px; /* Altura mínima para evitar saltos */
 }
 
 .filtro-item {
   position: relative;
+  z-index: 10;
 }
 
 .filtro-btn {
-  background-color: var(--bg-header, #333);
-  color: var(--font-cor);
+  background: linear-gradient(
+    135deg,
+    var(--card-glass-bg) 0%,
+    var(--card-glass-hover-bg) 100%
+  );
+  color: var(--card-text-primary);
   font-family: var(--font-textprimario);
   font-weight: 500;
-  padding: 0.9375rem 1.5625rem;
-  border: none;
-  border-radius: 6px;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--card-glass-border);
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-width: 120px;
   white-space: nowrap;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Estilo específico para o botão de preço para manter largura estável */
-.filtro-preco .filtro-btn {
-  min-width: 160px;
-  max-width: 200px;
+.filtro-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.filtro-btn:hover::before {
+  left: 100%;
 }
 
 .filtro-btn:hover {
-  background-color: var(--bg-card);
+  background: linear-gradient(
+    135deg,
+    var(--card-glass-hover-bg) 0%,
+    var(--card-glass-bg) 100%
+  );
+  border-color: var(--text-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--card-glass-shadow);
 }
 
+.filtro-btn.ativo {
+  background: linear-gradient(135deg, var(--text-accent) 0%, #4a9ac7 100%);
+  border-color: var(--text-accent);
+  color: #fff;
+}
+
+.filtro-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--card-text-primary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.filtro-btn.ativo .filtro-count {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* Estilo específico para o botão de preço */
+.filtro-preco .filtro-btn {
+  min-width: 160px;
+  max-width: 220px;
+}
+
+/* ===== GLASSMORPHISM APENAS NOS DROPDOWNS ===== */
 .filtro-dropdown {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 5px);
   left: 0;
-  background: var(--bg-card);
-  color: var(--font-cor);
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: var(--card-text-primary);
   list-style: none;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 0.6875rem 0.9375rem;
-  min-width: 12.5rem;
-  max-height: 25rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-glass-border);
+  box-shadow: 0 8px 24px var(--card-glass-shadow);
+  padding: 0.8rem;
+  min-width: 200px;
+  max-height: 300px;
   overflow-y: auto;
+  z-index: 1000;
+}
+
+.filtro-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--card-glass-border);
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+}
+
+.filtro-dropdown.ativo {
+  display: block;
+  animation: dropdownFadeIn 0.3s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filtro-dropdown li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filtro-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.filtro-dropdown li:hover {
+  background: var(--card-glass-hover-bg);
+  border-radius: 4px;
+  margin: 0 -0.4rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.filtro-dropdown label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-textprimario);
+  font-size: 0.95rem;
+  color: var(--card-text-primary);
+  transition: color 0.2s ease;
+}
+
+.filtro-dropdown label:hover {
+  color: var(--text-accent);
 }
 
 .filtro-dropdown input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 2px solid var(--bd-checkbox);
-  background: var(--cor-da-track);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid #666;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  align-self: start;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .filtro-dropdown input[type="checkbox"]:checked {
-  background: var(--cor-checked);
-  border: 2px solid var(--cor-bd-checked);
+  background: var(--text-accent);
+  border-color: var(--text-accent);
+}
+
+.filtro-dropdown input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .filtro-dropdown input[type="checkbox"]:hover {
-  background: var(--cor-hover-checked);
+  border-color: var(--text-accent);
+  transform: scale(1.1);
 }
 
+/* Scrollbar personalizada */
 .filtro-dropdown::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .filtro-dropdown::-webkit-scrollbar-track {
-  background: var(--cor-da-track);
-  border-radius: 0.625rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 .filtro-dropdown::-webkit-scrollbar-thumb {
-  background: var(--cor-da-handle);
-  border-radius: 0.625rem;
-  transition: background 0.3s ease-in-out;
+  background: #666;
+  border-radius: 3px;
+  transition: background 0.3s ease;
 }
 
 .filtro-dropdown::-webkit-scrollbar-thumb:hover {
-  background: var(--eft-do-track);
+  background: var(--text-accent);
 }
 
-.filtro-dropdown.ativo {
+/* Estilos específicos para o slider de preço */
+.filtro-preco-dropdown {
+  min-width: 280px;
+  padding: 1.2rem;
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.preco-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preco-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.preco-input-group {
+  flex: 1;
+}
+
+.preco-input-group label {
   display: block;
+  font-size: 0.9rem;
+  color: var(--card-text-primary);
+  font-weight: 500;
 }
 
-.filtro-dropdown li {
-  padding: 5px;
+.preco-slider-wrapper {
+  padding: 1rem 0;
+  margin: 0.5rem 0;
 }
 
-.filtro-dropdown label {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.625rem;
+.preco-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--card-text-primary);
+  margin-top: 0.5rem;
+}
+
+.preco-reset {
+  background: var(--card-glass-bg);
+  color: var(--card-text-primary);
+  border: 1px solid var(--card-glass-border);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  font-family: var(--font-textprimario);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.preco-reset:hover {
+  background: var(--card-glass-hover-bg);
+  border-color: var(--text-accent);
+}
+
+/* Botão limpar filtros */
+.limpar-filtros {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: #fff;
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.limpar-filtros:hover {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+/* Customização do rc-slider */
+.rc-slider {
+  height: 4px;
+}
+
+.rc-slider-track {
+  background-color: var(--text-accent) !important;
+  height: 4px;
+}
+
+.rc-slider-rail {
+  background-color: #3c3c3c !important;
+  height: 4px;
+}
+
+.rc-slider-handle {
+  background-color: var(--text-accent) !important;
+  border: 2px solid white !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: -7px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  opacity: 1 !important;
+}
+
+.rc-slider-handle:hover {
+  border-color: var(--text-accent) !important;
+  box-shadow: 0 0 0 5px rgba(102, 192, 244, 0.2) !important;
+}
+
+.rc-slider-handle:active {
+  box-shadow: 0 0 0 5px rgba(102, 192, 244, 0.3) !important;
+}
+
+.rc-slider-handle:focus {
+  border-color: var(--text-accent) !important;
+  box-shadow: 0 0 0 2px rgba(102, 192, 244, 0.2) !important;
+  outline: none !important;
+}
+
+.preco-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-accent);
   font-size: 1rem;
-  color: var(--font-cor);
+  margin-top: 0.5rem;
 }
 
-.filtro-dropdown span {
-  display: block;
-  word-break: break-word;
-  max-width: 12.5rem;
-}
-
-.filtro-dropdown input {
-  cursor: pointer;
-}
-
-.menu-hamburguer {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--font-cor);
-  cursor: pointer;
+.filtro-count {
+  font-size: 0.7rem;
+  color: var(--text-accent);
+  margin-left: 0.5rem;
+  font-weight: 500;
+  background-color: rgba(102, 192, 244, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  display: inline-block;
+  transition: all 0.2s ease;
+  vertical-align: middle;
 }
 
 @media (max-width: 768px) {
@@ -211,7 +489,9 @@
     right: 0;
     max-height: 50vh;
     width: 100vw;
-    background: #222;
+    background: var(--card-glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px 10px 0 0;
     overflow-y: auto;
@@ -243,17 +523,6 @@
   }
 }
 
-/* Novos estilos para contador de filtros e botão limpar */
-.filtro-count {
-  background: var(--cor-de-buttontrue);
-  color: white;
-  font-size: 0.7rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 10px;
-  margin-left: 0.3rem;
-  font-weight: bold;
-}
-
 .limpar-filtros {
   background: #dc3545;
   color: white;
@@ -277,124 +546,4 @@
     margin-top: 0.5rem;
     width: 100%;
   }
-}
-
-/* Estilos para o Slider de Preço */
-.filtro-preco-dropdown {
-  width: 280px;
-  padding: 1rem;
-}
-
-.preco-slider-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.preco-inputs {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.preco-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.preco-input-group label {
-  font-size: 0.875rem;
-  color: var(--font-cor);
-  font-weight: 500;
-}
-
-.preco-slider-wrapper {
-  padding: 1rem 0.5rem;
-  margin: 0.5rem 0;
-}
-
-/* Customização do rc-slider */
-.rc-slider {
-  height: 4px;
-}
-
-.rc-slider-track {
-  background-color: var(--steam-azul) !important;
-  height: 4px;
-}
-
-.rc-slider-rail {
-  background-color: #3c3c3c !important;
-  height: 4px;
-}
-
-.rc-slider-handle {
-  background-color: var(--steam-azul) !important;
-  border: 2px solid white !important;
-  width: 18px !important;
-  height: 18px !important;
-  margin-top: -7px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
-  opacity: 1 !important;
-}
-
-.rc-slider-handle:hover {
-  border-color: var(--steam-azul) !important;
-  box-shadow: 0 0 0 5px rgba(102, 192, 244, 0.2) !important;
-}
-
-.rc-slider-handle:active {
-  box-shadow: 0 0 0 5px rgba(102, 192, 244, 0.3) !important;
-}
-
-.rc-slider-handle:focus {
-  border-color: var(--steam-azul) !important;
-  box-shadow: 0 0 0 2px rgba(102, 192, 244, 0.2) !important;
-  outline: none !important;
-}
-
-.preco-display {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: var(--steam-azul);
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-.preco-reset {
-  padding: 0.5rem 1rem;
-  background: var(--bg-header);
-  color: var(--font-cor);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 0.5rem;
-}
-
-.preco-reset:hover {
-  background: var(--steam-azul);
-}
-
-.filtro-count {
-  font-size: 0.7rem;
-  color: var(--steam-azul);
-  margin-left: 0.5rem;
-  font-weight: 500;
-  background-color: rgba(102, 192, 244, 0.2);
-  padding: 0.2rem 0.4rem;
-  border-radius: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 80px;
-  display: inline-block;
-  transition: all 0.2s ease;
-  vertical-align: middle;
 }

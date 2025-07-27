@@ -81,7 +81,7 @@ label {
   input[type="checkbox"]:checked
   + label.btn-color-mode-switch-inner {
   background: var(--bg-mode-dark);
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .btn-color-mode-switch

@@ -5,13 +5,58 @@ export default function DarkMode() {
 
   function switchTheme(isDarkMode) {
     const root = document.documentElement;
+    const body = document.body;
+    
     if (isDarkMode) {
+      // Dark Mode
       root.style.setProperty('--bg-dark', '#e8e8e8');
       root.style.setProperty('--bg-light', '#121212');
+      
+      // Glassmorphism Dark Mode
+      root.style.setProperty('--card-glass-bg', 'rgba(255, 255, 255, 0.1)');
+      root.style.setProperty('--card-glass-border', 'rgba(255, 255, 255, 0.2)');
+      root.style.setProperty('--card-glass-shadow', 'rgba(0, 0, 0, 0.1)');
+      root.style.setProperty('--card-glass-hover-bg', 'rgba(255, 255, 255, 0.15)');
+      root.style.setProperty('--card-glass-hover-border', 'rgba(255, 255, 255, 0.3)');
+      root.style.setProperty('--card-glass-hover-shadow', 'rgba(0, 0, 0, 0.2)');
+      
+      // Texto Dark Mode
+      root.style.setProperty('--card-text-primary', '#ffffff');
+      root.style.setProperty('--card-text-secondary', 'rgba(255, 255, 255, 0.8)');
+      root.style.setProperty('--card-text-accent', '#00d4ff');
+      root.style.setProperty('--card-text-muted', 'rgba(255, 255, 255, 0.6)');
+      
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark');
     } else {
+      // Light Mode
       root.style.setProperty('--bg-dark', '#121212');
       root.style.setProperty('--bg-light', '#e8e8e8');
+      
+      // Glassmorphism Light Mode
+      root.style.setProperty('--card-glass-bg', 'rgba(255, 255, 255, 0.7)');
+      root.style.setProperty('--card-glass-border', 'rgba(255, 255, 255, 0.8)');
+      root.style.setProperty('--card-glass-shadow', 'rgba(0, 0, 0, 0.08)');
+      root.style.setProperty('--card-glass-hover-bg', 'rgba(255, 255, 255, 0.85)');
+      root.style.setProperty('--card-glass-hover-border', 'rgba(255, 255, 255, 0.9)');
+      root.style.setProperty('--card-glass-hover-shadow', 'rgba(0, 0, 0, 0.12)');
+      
+      // Texto Light Mode
+      root.style.setProperty('--card-text-primary', '#1a1a2e');
+      root.style.setProperty('--card-text-secondary', 'rgba(26, 26, 46, 0.8)');
+      root.style.setProperty('--card-text-accent', '#0066cc');
+      root.style.setProperty('--card-text-muted', 'rgba(26, 26, 46, 0.6)');
+      
+      // Gradientes mais suaves para light mode
+      root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)');
+      root.style.setProperty('--secondary-gradient', 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)');
+      root.style.setProperty('--accent-gradient', 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)');
+      root.style.setProperty('--success-gradient', 'linear-gradient(135deg, #10b981 0%, #059669 100%)');
+      root.style.setProperty('--warning-gradient', 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)');
+      
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
       localStorage.setItem('theme', 'light');
     }
   }

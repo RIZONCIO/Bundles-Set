@@ -1,18 +1,19 @@
+/* Container do buscador - centralizado e compacto */
 .search-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50%;
-  padding: 2rem;
+  width: 30rem;
+  padding: 0;
+  margin: 0;
 }
 
 .loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   animation: spin 1s linear infinite;
 }
 
@@ -25,183 +26,169 @@
   }
 }
 
-.catalog-title {
-  font-size: 3rem;
-  font-weight: 800;
-  font-family: var(--font-destaque);
-  color: white;
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
+/* Container da caixa de busca */
 .search-box {
   display: flex;
   align-items: center;
   position: relative;
   width: 100%;
-  max-width: 60rem;
+  max-width: 32rem; /* Reduzido de 60rem para 32rem */
 }
 
+/* Input de busca modernizado */
 .search-input {
   width: 100%;
-  padding: 1rem 3rem 1rem 1rem;
-  font-size: 1.5rem;
+  padding: 0.75rem 3.5rem 0.75rem 1.2rem; /* Padding reduzido */
+  font-size: 1rem; /* Reduzido de 1.5rem */
   font-family: var(--font-destaque);
-  border: 4px solid var(--bordar-cinza);
-  border-radius: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--bordar-cinza); /* Borda mais fina */
+  border-radius: 1.5rem; /* Mais arredondado e compacto */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Sombra mais sutil */
   outline: none;
   transition: all 0.3s ease;
   background-color: white;
 }
 
+/* Estados hover e focus mais suaves */
 .search-input:hover {
   border-color: var(--cor-de-buttontrue);
-  box-shadow: 0 0.5rem 1rem var(--brilho-azul);
+  box-shadow: 0 0.3rem 0.8rem var(--brilho-azul);
+  transform: translateY(-1px); /* Efeito sutil de elevação */
 }
 
 .search-input:focus {
   border-color: var(--cor-de-buttontrue);
-  box-shadow: 0 0.5rem 1rem var(--brilho-azul);
+  box-shadow: 0 0.4rem 1rem var(--brilho-azul);
+  transform: translateY(-1px);
 }
 
+/* Ícone de busca */
 .search-icon {
   position: absolute;
-  right: 1.8rem;
+  right: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  pointer-events: auto; /* Não interfere na interação com o input (Mathues Quando você for Aplicar função de botão para pesquisar editar!) */
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .search-icon svg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
   fill: var(--bordar-cinza);
   transition: transform 0.2s ease, fill 0.3s ease;
 }
 
-.search-input:hover ~ .search-icon svg {
-  transform: scale(1.1);
-  fill: var(--bg-card);
+.search-input:hover ~ .search-icon svg,
+.search-icon:hover svg {
+  transform: scale(1.15);
+  fill: var(--svg-lupa-hover);
 }
 
-.search-input {
-  padding-right: 3.5rem;
-}
-
-@media (max-width: 768px) {
-  .catalog-title {
-    font-size: 2.375rem;
-  }
-
-  .search-box {
-    width: 90%;
-    max-width: 45rem;
-  }
-
-  .search-input {
-    font-size: 1.3rem;
-    padding: 0.8rem 3rem 0.8rem 1rem;
-  }
-
-  .search-icon svg {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-}
-
-@media (max-width: 425px) {
-  .catalog-title {
-    font-size: 1.875rem;
-  }
-
-  .search-box {
-    max-width: 30rem;
-    width: 80%;
-  }
-
-  .search-input {
-    font-size: 1.2rem;
-    padding: 0.7rem 2.5rem 0.7rem 1rem;
-    border-width: 3px;
-  }
-
-  .search-icon {
-    right: 1.2rem;
-  }
-
-  .search-icon svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .search-container {
-    padding: 0rem 0rem 1.2rem 0rem;
-  }
-}
-
-/* Novos estilos para controles de busca e histórico */
+/* Controles de busca */
 .search-controls {
   display: flex;
   align-items: center;
   position: absolute;
-  right: 0.5rem;
-  gap: 0.5rem;
+  right: 0.4rem;
+  gap: 0.3rem;
+  z-index: 3;
 }
 
+/* Botão de limpar busca */
 .clear-search {
   background: none;
   border: none;
   color: #999;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   padding: 0.2rem;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .clear-search:hover {
   color: #666;
   background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
-.search-history {
-  margin-top: 1rem;
-  text-align: center;
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+  .search-box {
+    max-width: 28rem; /* Proporcional ao header em tablets */
+  }
+
+  .search-input {
+    font-size: 0.95rem;
+    padding: 0.7rem 3.2rem 0.7rem 1.1rem;
+    height: 2.3rem;
+  }
+
+  .search-icon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
 }
 
-.history-label {
-  color: white;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  display: block;
+/* Responsividade para mobile */
+@media (max-width: 425px) {
+  .search-box {
+    max-width: 24rem; /* Adaptado para mobile */
+    width: 90%;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+    padding: 0.6rem 2.8rem 0.6rem 1rem;
+    border-width: 2px;
+    height: 2.2rem;
+    border-radius: 1.2rem;
+  }
+
+  .search-icon {
+    right: 1rem;
+  }
+
+  .search-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .search-container {
+    padding: 0;
+  }
 }
 
-.history-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+/* Estados especiais para melhor UX */
+.search-input::placeholder {
+  color: #999;
+  opacity: 0.8;
 }
 
-.history-item {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.2s;
+.search-input:focus::placeholder {
+  opacity: 0.5;
 }
 
-.history-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+/* Animação suave para o container */
+.search-container {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -24,7 +24,6 @@ export default function SearchContainer({ onSearchResults, onClearSearch }) {
     if (hasFetched) return;
     setIsLoading(true);
     try {
-      // Verificar se há dados frescos no IndexedDB primeiro
       const dataIsFresh = await isDataFresh("allBundles", 30);
       
       if (dataIsFresh) {
@@ -54,7 +53,7 @@ export default function SearchContainer({ onSearchResults, onClearSearch }) {
 
   const saveSearchTerm = (term) => {
     if (term.trim() && !searchHistory.includes(term)) {
-      const newHistory = [term, ...searchHistory.slice(0, 4)]; // Manter apenas 5 itens
+      const newHistory = [term, ...searchHistory.slice(0, 4)]; 
       setSearchHistory(newHistory);
       localStorage.setItem('searchHistory', JSON.stringify(newHistory));
     }
@@ -110,9 +109,11 @@ export default function SearchContainer({ onSearchResults, onClearSearch }) {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
+      event.preventDefault(); // Previne comportamento padrão
       handleSearch();
     }
   };
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
@@ -122,77 +123,80 @@ export default function SearchContainer({ onSearchResults, onClearSearch }) {
       return;
     }
 
-    // Limpa o timeout anterior e define um novo
+    // Limpar timeout anterior
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
 
+    // Definir novo timeout para busca automática
     setTypingTimeout(
       setTimeout(() => {
-        handleSearch(); // Executa a busca após 1 segundo de inatividade
-      }, 1000)
+        handleSearch(); 
+      }, 800) // Reduzido de 1000ms para 800ms para resposta mais rápida
     );
   };
 
   const handleClearSearch = () => {
     setSearchTerm("");
     onClearSearch?.();
+    
+    // Limpar timeout se existir
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+      setTypingTimeout(null);
+    }
   };
 
-  const handleHistoryClick = (term) => {
-    setSearchTerm(term);
-    // Trigger search after setting the term
-    setTimeout(() => handleSearch(), 100);
-  };
+  // Cleanup do timeout quando o componente for desmontado
+  useEffect(() => {
+    return () => {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+    };
+  }, [typingTimeout]);
 
   return (
     <section className="search-container">
-      <h1 className="catalog-title">Catálogo de Bundles</h1>
       <div className="search-box">
         <input
           type="text"
           className="search-input"
           placeholder="Busque por bundles, gêneros, desenvolvedores..."
           value={searchTerm}
-          onFocus={loadBundles} // Carrega os bundles ao focar no campo
+          onFocus={loadBundles} 
           onChange={handleInputChange}
           onKeyDown={handleKeyPress} 
+          aria-label="Campo de busca de bundles"
         />
         <div className="search-controls">
           {searchTerm && (
-            <button className="clear-search" onClick={handleClearSearch}>
+            <button 
+              className="clear-search" 
+              onClick={handleClearSearch}
+              aria-label="Limpar busca"
+              title="Limpar busca"
+            >
               ✕
             </button>
           )}
-          <div className="search-icon" onClick={handleSearch}>
+          <div 
+            className="search-icon" 
+            onClick={handleSearch}
+            role="button"
+            aria-label="Executar busca"
+            title="Buscar"
+          >
             {isLoading ? (
-              <div className="loading-spinner"></div>
+              <div className="loading-spinner" aria-label="Carregando..."></div>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
               </svg>
             )}
           </div>
         </div>
       </div>
-      
-      {/* Histórico de busca */}
-      {searchHistory.length > 0 && !searchTerm && (
-        <div className="search-history">
-          <span className="history-label">Buscas recentes:</span>
-          <div className="history-items">
-            {searchHistory.map((term, index) => (
-              <button
-                key={index}
-                className="history-item"
-                onClick={() => handleHistoryClick(term)}
-              >
-                {term}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   );
 }

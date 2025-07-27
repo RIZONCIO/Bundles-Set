@@ -1,191 +1,422 @@
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 1.25rem;
-  padding: 1.25rem;
-  max-width: auto;
-  margin: 0 6.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1400px;
+  position: relative;
 }
 
 .card {
-  background-color: var(--bg-card);
-  border-radius: 0.5rem;
+  position: relative;
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-glass-border);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  box-shadow: 0 8px 32px var(--card-glass-shadow);
+  transition: all 0.3s ease;
   display: block;
   text-decoration: none;
   color: inherit;
+  will-change: transform;
 }
 
 .card:hover {
-  transform: translateY(-0.3125rem);
-  border-color: var(--cor-de-buttontrue);
-  box-shadow: 0 0.5rem 1rem var(--brilho-azul);
+  transform: translateY(-8px);
+  background: var(--card-glass-hover-bg);
+  border-color: var(--card-glass-hover-border);
+  box-shadow: 0 12px 40px var(--card-glass-hover-shadow),
+    0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: 20px;
+}
+
+.card:hover::before {
+  opacity: 0.06;
 }
 
 .card img {
   width: 100%;
-  height: 9.375rem;
-  object-fit: contain;
-  background-color: var(--bg-card);
+  height: 12rem;
+  object-fit: cover;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.03);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::after {
+  opacity: 0.8;
 }
 
 .card-content {
-  padding: 0.9375rem;
-  color: var(--font-cor);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .card h3 {
-  font-size: 1.2rem;
-  margin: 0 0 0.625rem;
-  font-family: var(--font-título);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  color: var(--card-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  position: relative;
 }
 
-.card .preco-btn-container {
+.card:hover h3 {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card h3::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+.card:hover h3::before {
+  height: 120%;
+}
+
+.card .preco-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 0.625rem;
-  gap: 4.5rem;
+  margin-top: 0.5rem;
 }
 
 .precos {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .preco-original {
   font-size: 0.9rem;
-  color: var(--font-cor);
+  opacity: 0.6;
   text-decoration: line-through;
-  opacity: 0.7;
+  color: var(--card-text-secondary);
+  font-weight: 500;
 }
 
 .preco {
-  font-size: 1.125rem;
-  font-weight: bold;
-  color: var(--preco-cor);
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 0.03rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--neon-green);
+  font-family: "SF Pro Display", -apple-system, sans-serif;
+  letter-spacing: -0.02em;
+  position: relative;
 }
 
-.desconto {
-  background: #4ade80;
-  color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 0.25rem;
+.card:hover .preco {
+  background: var(--success-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.bundle-details {
-  margin-top: 0.75rem;
+.preco::before {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--success-gradient);
+  transition: width 0.3s ease;
+}
+
+.card:hover .preco::before {
+  width: 100%;
+}
+
+.card .btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
+  background: var(--card-glass-bg);
+  color: var(--card-text-primary);
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--card-glass-border);
+  box-shadow: 0 4px 15px var(--card-glass-shadow);
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.card a:hover::before {
+  left: 100%;
+}
+
+.card a:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: var(--primary-gradient);
+  box-shadow: 0 8px 25px var(--neon-blue), 0 0 20px rgba(0, 212, 255, 0.3);
+  border-color: var(--neon-blue);
+  color: var(--text-primary);
 }
 
 .genres {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  margin-top: 0.5rem;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .genre-tag {
-  background: var(--cor-de-buttontrue);
-  color: var(--bg-card);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.7rem;
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--card-text-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
   font-weight: 500;
+  border: 1px solid var(--card-glass-border);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.preco {
-  font-size: 1.125rem;
-  font-weight: bold;
-  color: var(--preco-cor);
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 0.03rem;
+.genre-tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
+.genre-tag:hover::before {
+  opacity: 1;
+}
+
+.genre-tag:hover {
+  transform: translateY(-2px);
+  background: var(--card-glass-hover-bg);
+  border-color: var(--card-glass-hover-border);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+  color: var(--text-primary);
+}
+
+/* ===== QUANTIDADE ADAPTATIVA ===== */
 .card .quantidade {
-  font-weight: bold;
-  margin-bottom: 0.625rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
   display: block;
-  color: var(--cor-de-buttontrue);
+  color: var(--card-text-accent);
+  font-size: 1.1rem;
 }
 
-.card a {
-  display: inline-block;
-  padding: 0.625rem 0.9375rem;
-  background-color: var(--cor-de-buttontrue);
-  color: var(--bg-card);
-  border-radius: 0.375rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
+/* Gradient na quantidade apenas no hover */
+.card:hover .quantidade {
+  background: var(--warning-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.card a:hover {
-  background-color: var(--cor-de-buttontrue);
-  color: var(--bg-header);
-  border-color: var(--cor-de-buttontrue);
-  box-shadow: 0 0.25rem 0.75rem var(--brilho-azul);
+/* ===== FAIXA DE PROMOÇÃO ADAPTATIVA ===== */
+.card .faixa-promocao {
+  position: absolute;
+  top: 1rem;
+  left: -1.7rem;
+  background: var(--secondary-gradient);
+  color: var(--text-primary);
+  padding: 0.4rem 2.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4);
+  z-index: 10;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@media (min-width: 320px) {
+/* ===== ANIMAÇÃO DE ENTRADA OTIMIZADA ===== */
+.card {
+  animation: slideUp 0.4s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplicar delay menor na animação */
+.card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+/* ===== AJUSTES ESPECÍFICOS PARA LIGHT MODE ===== */
+body.light-mode .card h3,
+body.light-mode .preco,
+body.light-mode .quantidade {
+  /* Garantir legibilidade no modo claro sem gradients por padrão */
+  color: var(--card-text-primary);
+}
+
+/* Manter os gradients apenas no hover no light mode */
+body.light-mode .card:hover h3 {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light-mode .card:hover .preco {
+  background: var(--success-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light-mode .card:hover .quantidade {
+  background: var(--warning-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== RESPONSIVIDADE OTIMIZADA ===== */
+@media (max-width: 768px) {
   .cards-container {
-    max-width: none;
-    margin: 0;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .card {
+    border-radius: 18px;
+  }
+
+  .card-content {
     padding: 1.25rem;
   }
 
-  .card .preco-btn-container {
-    gap: 1rem;
-  }
-}
-@media (min-width: 375px) {
-  .cards-container {
-    max-width: none;
-    margin: 0 1rem;
-    padding: 1.25rem;
+  .card h3 {
+    font-size: 1.2rem;
   }
 
-  .card .preco-btn-container {
-    gap: 2rem;
+  .preco {
+    font-size: 1.3rem;
   }
 }
 
-@media (min-width: 425px) {
+@media (max-width: 480px) {
   .cards-container {
-    margin: 0px;
-  }
-
-  .card a {
-    padding: 0.5rem 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1rem;
   }
 
   .card img {
-    height: auto;
+    height: 10rem;
   }
 
-  .card .preco-btn-container {
-    gap: 5.2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .cards-container {
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  }
-
-  .card img {
-    height: 15rem;
-  }
-
-  .card .preco-btn-container {
-    gap: 12rem;
+  .card::after {
+    height: 10rem;
   }
 }

@@ -16,7 +16,6 @@ export default function FiltroContainer({ onFilterResults, bundles = [] }) {
   const [precoDebounced, setPrecoDebounced] = useState({ min: 0, max: 500 });
   const filtrosWrapperRef = useRef(null);
 
-  // Gerar filtros dinamicamente baseados nos dados da API
   const [filtrosDinamicos, setFiltrosDinamicos] = useState({
     Sistema: ["Windows", "Mac", "Linux"],
     Gêneros: [],
@@ -24,15 +23,13 @@ export default function FiltroContainer({ onFilterResults, bundles = [] }) {
     Distribuidora: [],
   });
 
-  // Carregar opções de filtro da API e fallback local
   useEffect(() => {
     const loadFilterOptions = async () => {
       try {
-        // Tentar buscar da API primeiro
         const apiResponse = await fetchFilterOptions();
         
         if (apiResponse.success) {
-          const { genres, categories, platforms, priceRange, discountRange } = apiResponse.data;
+          const { genres, categories, platforms, priceRange} = apiResponse.data;
           
           setFiltrosDinamicos({
             Sistema: platforms || ["Windows", "Mac", "Linux"],

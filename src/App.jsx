@@ -68,17 +68,17 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header_ />
+      <Header_
+        onSearchResults={handleSearchResults}
+        onClearSearch={handleClearSearch}
+      />
       <main>
         <BannerOferta />
-        <SearchContainer 
-          onSearchResults={handleSearchResults}
-          onClearSearch={handleClearSearch}
-        />
         
         {/* Componente de estatísticas da API */}
         <ApiStats metadata={metadata} />
         
+
         <FiltroContainer 
           onFilterResults={handleFilterResults}
           bundles={isSearching ? searchResults : bundles}

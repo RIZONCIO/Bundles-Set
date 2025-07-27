@@ -34,7 +34,7 @@ export default function Footer() {
 
   return (
     <footer>
-      <section className="footer-container">
+      <section className="footer-container" id="contato">
         <div className="footer-content">
           <SocialBlock title="Matheus Coelho" links={devOneLinks} />
           <div className="separator"></div>

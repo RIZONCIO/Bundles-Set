@@ -6,7 +6,8 @@ import TermosUso from "./pages/TermosUso";
 import Doacao from "./pages/Doacao";
 import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
 import Gratis from "./pages/Gratis";
-import Evento from "./pages/Evento"; // Importando a página Evento
+import Evento from "./pages/Evento"; 
+import Footer from "./components/Footer";
 
 export default function AppRoutes() {
   return (

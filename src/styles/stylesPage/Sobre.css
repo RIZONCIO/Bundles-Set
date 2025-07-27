@@ -2,6 +2,7 @@
   color: var(--font-cor);
   text-align: center;
   padding: 3.125rem 1.25rem;
+  margin-top: 10rem;
 }
 
 .sobre-banner {
@@ -43,7 +44,7 @@
 
 .sobre-texto i {
   margin-bottom: 0.625rem;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .info-item {
@@ -56,7 +57,7 @@
 
 .info-item i {
   margin-bottom: 0.625rem;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .info-item img {

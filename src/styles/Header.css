@@ -1,12 +1,19 @@
+/* ===== HEADER GLASSMORPHISM ADAPTATIVO ===== */
 .header {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--bg-header, #333);
-  border-bottom: 2px solid var(--cor-bordar, #555);
+  padding: 0.8rem 1rem;
+  background: var(--card-glass-bg);
+  border: 1px solid var(--card-glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px var(--card-glass-shadow);
+  border-radius: 0 0 12px 12px;
   overflow: hidden;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .header::before {
@@ -18,13 +25,27 @@
   height: 3.2rem;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 0%,
     transparent 70%
   );
   border-radius: 50%;
   transform: translate(-50%, -50%);
   animation: flash-explosao 8s infinite;
   z-index: 1;
+  pointer-events: none;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: neon-pulse 3s ease-in-out infinite;
+  z-index: 2;
 }
 
 @keyframes flash-explosao {
@@ -33,15 +54,15 @@
     transform: translate(-50%, -50%) scale(0);
   }
   10% {
-    opacity: 1;
+    opacity: 0.8;
     transform: translate(-50%, -50%) scale(1.5);
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.5;
     transform: translate(-50%, -50%) scale(10);
   }
   70% {
-    opacity: 0.5;
+    opacity: 0.3;
     transform: translate(-50%, -50%) scale(30);
   }
   100% {
@@ -50,12 +71,23 @@
   }
 }
 
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px var(--neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--neon-blue);
+  }
+}
+
+/* ===== TÍTULO ADAPTATIVO ===== */
 .title-container {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
 .title-container a {
@@ -66,8 +98,14 @@
   font-weight: 900;
   margin: 0;
   font-size: 1.5rem;
-  color: white;
+  color: var(--card-text-primary);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: color 0.3s ease;
+}
+
+/* Ajuste da sombra do texto para light mode */
+body.light-mode .title-container a {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .header img {
@@ -75,12 +113,212 @@
   height: 2rem;
   padding-left: 6px;
   padding-right: 6px;
+  transition: opacity 0.3s ease;
 }
 
+/* ===== TOGGLE THEME ADAPTATIVO ===== */
+.theme-toggle {
+  background: var(--card-glass-bg);
+  border: 1px solid var(--card-glass-border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: var(--card-text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 5;
+  font-weight: 500;
+}
+
+.theme-toggle:hover {
+  background: var(--card-glass-hover-bg);
+  border-color: var(--card-glass-hover-border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--card-glass-hover-shadow);
+}
+
+.header-complete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* ===== DROPDOWN MENU ADAPTATIVO ===== */
+.dropdown-menu {
+  background: var(--card-glass-bg);
+  border: 1px solid var(--card-glass-border);
+  border-top: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 12px var(--card-glass-shadow);
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  z-index: 999;
+  left: 0.6rem;
+  width: calc(100% - 1.3rem);
+}
+
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: neon-pulse 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+.dropdown-menu.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown-content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+/* ===== MENU ITEMS ADAPTATIVOS ===== */
+.menu-item {
+  color: var(--card-text-primary);
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  background: var(--card-glass-bg);
+  border: 1px solid var(--card-glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.menu-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.menu-item:hover::before {
+  left: 100%;
+}
+
+.menu-item:hover {
+  background: var(--card-glass-hover-bg);
+  border-color: var(--card-glass-hover-border);
+  color: var(--card-text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--card-glass-hover-shadow);
+}
+
+/* ===== CONTEÚDO DA PÁGINA ===== */
+.page-content {
+  margin-top: 140px;
+  padding: 2rem;
+}
+
+.content {
+  margin-top: 140px;
+  padding: 2rem;
+}
+
+.demo-content {
+  height: 200vh;
+  background: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  transition: background 0.3s ease;
+}
+
+.demo-card {
+  background: var(--card-glass-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-glass-border);
+  text-align: center;
+  max-width: 600px;
+  color: var(--card-text-primary);
+  transition: all 0.3s ease;
+}
+
+.demo-card:hover {
+  background: var(--card-glass-hover-bg);
+  border-color: var(--card-glass-hover-border);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--card-glass-hover-shadow);
+}
+
+/* ===== AJUSTES ESPECÍFICOS PARA LIGHT MODE ===== */
+body.light-mode .header::before {
+  background: radial-gradient(
+    circle,
+    rgba(100, 100, 100, 0.3) 0%,
+    transparent 70%
+  );
+}
+
+body.light-mode .menu-item::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 100, 100, 0.2),
+    transparent
+  );
+}
+
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .header {
     flex-direction: row;
     padding: 1rem 2rem;
+  }
+
+  .dropdown-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .content,
+  .page-content {
+    margin-top: 160px;
   }
 }
 
@@ -101,6 +339,20 @@
   .header::before {
     animation: none;
     display: none;
+  }
+
+  .dropdown-menu::before {
+    display: none;
+  }
+
+  .dropdown-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .content,
+  .page-content {
+    margin-top: 120px;
   }
 }
 

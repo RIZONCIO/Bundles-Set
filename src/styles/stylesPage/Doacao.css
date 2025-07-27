@@ -4,7 +4,7 @@
   border-radius: 0.9375rem;
   text-align: center;
   max-width: 50rem;
-  margin: 1.25rem auto;
+  margin: 10rem auto 1.25rem auto;
   box-shadow: 0 0 1.5625rem rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(0.4375rem);
 }
@@ -13,7 +13,7 @@
   background: rgba(0, 0, 0, 0.6);
   padding: 1.875rem;
   border-radius: 0.625rem;
-  color: var(--branco-neve);
+  color: var(--text-primary);
 }
 
 .lista-doacao {
@@ -58,7 +58,7 @@
   padding: 1.875rem;
   border-radius: 0.625rem;
   text-align: center;
-  color: var(--branco-neve);
+  color: var(--text-primary);
   max-width: 37.5rem;
   margin: 1.25rem auto;
   box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.2);
@@ -109,7 +109,7 @@
 }
 
 .doacao-card {
-  background: var(--bg-card);
+  background: #1f1f1f;
   padding: 1.25rem;
   border-radius: 0.625rem;
   text-align: center;
@@ -126,7 +126,7 @@
 .doacao-card img {
   width: 12.5rem;
   height: 12.5rem;
-  background-color: var(--branco-neve);
+  background-color: var(--text-primary);
   border-radius: 10px;
   margin: 0.625rem 0;
 }
@@ -138,8 +138,8 @@
   text-decoration: none;
   max-width: 15.625rem;
   margin: 10px auto;
-  background: var(--cor-do-bg);
-  color: var(--branco-neve);
+  background: #121212;
+  color: var(--text-primary);
   border: none;
   padding: 0.75rem;
   border-radius: 0.3125rem;

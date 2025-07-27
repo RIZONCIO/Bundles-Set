@@ -9,13 +9,13 @@ const DisplayBundles = ({ data }) => {
   return (
     <div className="cards-container">
       {data.bundles.map((bundle, index) => (
-        <a
+        <div
           key={`${bundle.bundleid}-${index}`}
           className="card"
-          href={`https://store.steampowered.com/bundle/${bundle.bundleid}/`}
-          target="_blank"
-          rel="noopener noreferrer"
         >
+          {bundle.discount_percent > 0 && (
+            <div className="faixa-promocao">-{bundle.discount_percent}%</div>
+          )}
           {bundle.header_image_url ? (
             <img src={bundle.header_image_url} alt={bundle.name || "Bundle"} />
           ) : bundle.main_capsule ? (
@@ -26,18 +26,28 @@ const DisplayBundles = ({ data }) => {
           <div className="card-content">
             <h3>{bundle.name}</h3>
             <p>{bundle.description || ""}</p>
-            <div className="preco-btn-container">
+            
+            {/* Container do preço separado */}
+            <div className="preco-container">
               <div className="precos">
                 {bundle.discount_percent > 0 && (
                   <p className="preco-original">{bundle.formatted_orig_price}</p>
                 )}
                 <p className="preco">{bundle.formatted_final_price}</p>
-                {bundle.discount_percent > 0 && (
-                  <span className="desconto">-{bundle.discount_percent}%</span>
-                )}
               </div>
-              <span className="btn-steam-link">Ver na Steam</span>
             </div>
+
+            {/* Container do botão separado */}
+            <div className="btn-container">
+              <a
+                href={`https://store.steampowered.com/bundle/${bundle.bundleid}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver na Steam
+              </a>
+            </div>
+
             {bundle.page_details && (
               <div className="bundle-details">
                 {bundle.page_details.gênero && bundle.page_details.gênero.length > 0 && (
@@ -50,7 +60,7 @@ const DisplayBundles = ({ data }) => {
               </div>
             )}
           </div>
-        </a>
+        </div>
       ))}
     </div>
   );
