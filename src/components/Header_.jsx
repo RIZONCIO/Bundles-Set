@@ -30,8 +30,10 @@ export default function Header_({ onSearchResults, onClearSearch }) {
         <div className="title-container">
           <a href="/">
             <img src="/img/logo2.png" alt="Logo" />
-            Steam Bundle Set
-            <img src="/img/logo2.png" alt="Logo" className="logo-mobile-hide" />
+            <span className="title-text">
+              <span className="line1">Steam</span>
+              <span className="line2">Bundleset</span>
+            </span>
           </a>
         </div>
 
@@ -53,9 +55,10 @@ export default function Header_({ onSearchResults, onClearSearch }) {
       <nav className={`dropdown-menu ${hideDropdown ? 'hidden' : ''}`}>
         <div className="dropdown-content">
           <a href="/" className="menu-item">Home</a>
-          <a href="/Promocao" className="menu-item">Promoções</a>
+          <a href="/Evento" className="menu-item">Lista De Eventos</a>
           <a href="/free" className="menu-item">Grátis</a>
           <a href="#contato" className="menu-item">Contato</a>
+          <a href="/Doacao" className="menu-item">Doação</a>
         </div>
       </nav>
     </div>
