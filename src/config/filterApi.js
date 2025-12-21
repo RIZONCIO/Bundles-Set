@@ -1,33 +1,52 @@
-// API para opções de filtro
-const API_URL = "https://steambundleapi.onrender.com";
+import { supabase } from "./supabase";
 
+/**
+ * Busca opções de filtro do Supabase
+ * @returns {Promise<Object>} - Opções de filtro disponíveis
+ */
 export const fetchFilterOptions = async () => {
   try {
-    const response = await fetch(`${API_URL}/api/filter-options`);
+    // Buscar estatísticas gerais dos bundles
+    const { data, error } = await supabase
+      .from('bundles')
+      .select('final_price, discount, platform_windows, platform_mac, platform_linux');
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    if (error) throw error;
 
-    const data = await response.json();
+    // Calcular ranges
+    const precos = data
+      .filter(b => b.final_price > 0)
+      .map(b => b.final_price);
+
+    const minPreco = Math.floor(Math.min(...precos));
+    const maxPreco = Math.ceil(Math.max(...precos));
+
+    // Plataformas disponíveis
+    const platforms = [];
+    if (data.some(b => b.platform_windows)) platforms.push('Windows');
+    if (data.some(b => b.platform_mac)) platforms.push('Mac');
+    if (data.some(b => b.platform_linux)) platforms.push('Linux');
 
     return {
       success: true,
-      data: data,
-      headers: {
-        dataSource: response.headers.get("X-Data-Source"),
-        totalBundles: response.headers.get("X-Total-Bundles"),
-        cacheStatus: response.headers.get("X-Cache-Status"),
+      data: {
+        platforms,
+        priceRange: { min: minPreco, max: maxPreco },
+        discountRange: { min: 0, max: 100 },
+        totalBundles: data.length
       },
+      headers: {
+        dataSource: 'Supabase',
+        totalBundles: data.length,
+        cacheStatus: 'live'
+      }
     };
   } catch (error) {
-    console.error("Erro ao buscar opções de filtro:", error);
+    console.error('Erro ao buscar opções de filtro:', error);
     return {
       success: false,
       error: error.message,
       fallback: {
-        genres: [],
-        categories: [],
         platforms: ["Windows", "Mac", "Linux"],
         priceRange: { min: 0, max: 500 },
         discountRange: { min: 0, max: 100 },
@@ -35,3 +54,4 @@ export const fetchFilterOptions = async () => {
     };
   }
 };
+

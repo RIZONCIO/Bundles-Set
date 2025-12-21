@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Supabase - Steam Bundles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #fff;
+        }
+        h1 { color: #66fcf1; }
+        .bundle-card {
+            background: #16213e;
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .bundle-image {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .bundle-info { flex: 1; }
+        .bundle-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .bundle-price {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+        }
+        .price-final {
+            font-size: 24px;
+            color: #66fcf1;
+            font-weight: bold;
+        }
+        .discount {
+            background: #0f3460;
+            color: #66fcf1;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .loading { text-align: center; padding: 20px; }
+        .error { color: #ff5555; }
+        .stats {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .stat-item {
+            background: #16213e;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .stat-label { color: #999; font-size: 12px; }
+        .stat-value { font-size: 24px; color: #66fcf1; font-weight: bold; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>🎮 Teste Supabase - Steam Bundles</h1>
+    
+    <div class="stats" id="stats">
+        <h2>📊 Estatísticas</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total Bundles</div>
+                <div class="stat-value" id="total-bundles">-</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Com Desconto</div>
+                <div class="stat-value" id="with-discount">-</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Melhor Oferta</div>
+                <div class="stat-value" id="best-deal">-</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>🔥 Top 10 Ofertas</h2>
+    <div id="bundles"></div>
+    
+    <script>
+        const SUPABASE_URL = 'https://hjespkvqdpalpsbcdzgq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqZXNwa3ZxZHBhbHBzYmNkemdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjM2MzgsImV4cCI6MjA3OTIzOTYzOH0.Tz02QLK9uqutm_s5uR14RhPsda8rS-blDCAqSnjL_As';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadStats() {
+            try {
+                // Total bundles
+                const { count: totalCount } = await supabase
+                    .from('bundles')
+                    .select('*', { count: 'exact', head: true });
+
+                // Bundles com desconto
+                const { count: discountCount } = await supabase
+                    .from('bundles')
+                    .select('*', { count: 'exact', head: true })
+                    .gt('discount', 0);
+
+                // Melhor oferta
+                const { data: bestDeal } = await supabase
+                    .from('bundles')
+                    .select('discount')
+                    .order('discount', { ascending: false })
+                    .limit(1)
+                    .single();
+
+                document.getElementById('total-bundles').textContent = totalCount.toLocaleString();
+                document.getElementById('with-discount').textContent = discountCount.toLocaleString();
+                document.getElementById('best-deal').textContent = bestDeal.discount + '%';
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+
+        async function loadBundles() {
+            const container = document.getElementById('bundles');
+            container.innerHTML = '<div class="loading">⏳ Carregando bundles do Supabase...</div>';
+
+            try {
+                const { data, error } = await supabase
+                    .from('bundles')
+                    .select('*')
+                    .gte('discount', 10)
+                    .order('discount', { ascending: false })
+                    .limit(10);
+
+                if (error) throw error;
+
+                container.innerHTML = '';
+
+                data.forEach(bundle => {
+                    const card = document.createElement('div');
+                    card.className = 'bundle-card';
+                    card.innerHTML = `
+                        <img src="${bundle.header_image || bundle.capsule_image}" 
+                             alt="${bundle.name}" 
+                             class="bundle-image"
+                             onerror="this.src='https://via.placeholder.com/200x120?text=No+Image'">
+                        <div class="bundle-info">
+                            <div class="bundle-name">${bundle.name}</div>
+                            <div class="bundle-price">
+                                ${bundle.original_price > bundle.final_price ? 
+                                    `<span class="price-original">${bundle.formatted_original_price || 'R$ ' + bundle.original_price.toFixed(2)}</span>` : ''}
+                                <span class="price-final">${bundle.formatted_final_price || 'R$ ' + bundle.final_price.toFixed(2)}</span>
+                                ${bundle.discount > 0 ? `<span class="discount">-${bundle.discount}%</span>` : ''}
+                            </div>
+                            <div style="margin-top: 10px; color: #999; font-size: 14px;">
+                                ${bundle.games_count || 0} jogos • 
+                                ${[
+                                    bundle.platform_windows ? '🪟 Windows' : '',
+                                    bundle.platform_mac ? '🍎 Mac' : '',
+                                    bundle.platform_linux ? '🐧 Linux' : ''
+                                ].filter(Boolean).join(' • ')}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+
+                console.log('✅ Carregados', data.length, 'bundles do Supabase');
+            } catch (error) {
+                console.error('❌ Erro:', error);
+                container.innerHTML = `<div class="error">❌ Erro ao carregar: ${error.message}</div>`;
+            }
+        }
+
+        // Carregar ao abrir a página
+        loadStats();
+        loadBundles();
+    </script>
+</body>
+</html>

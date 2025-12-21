@@ -16,12 +16,38 @@ const DisplayBundles = ({ data }) => {
           {bundle.discount_percent > 0 && (
             <div className="faixa-promocao">-{bundle.discount_percent}%</div>
           )}
-          {bundle.header_image_url ? (
+          {bundle.library_image ? (
+            <img 
+              src={bundle.library_image} 
+              alt={bundle.name || "Bundle"}
+              onError={(e) => {
+                console.log('Erro ao carregar library_image:', bundle.library_image);
+                // Tentar header_image como fallback
+                if (bundle.header_image && e.target.src !== bundle.header_image) {
+                  e.target.src = bundle.header_image;
+                }
+                // Se header também falhar, tentar capsule
+                else if (bundle.capsule_image && e.target.src !== bundle.capsule_image) {
+                  e.target.src = bundle.capsule_image;
+                }
+                // Se tudo falhar, mostrar placeholder
+                else {
+                  e.target.src = 'https://via.placeholder.com/600x900?text=No+Image';
+                }
+              }}
+            />
+          ) : bundle.header_image ? (
+            <img src={bundle.header_image} alt={bundle.name || "Bundle"} />
+          ) : bundle.capsule_image ? (
+            <img src={bundle.capsule_image} alt={bundle.name || "Bundle"} />
+          ) : bundle.header_image_url ? (
             <img src={bundle.header_image_url} alt={bundle.name || "Bundle"} />
           ) : bundle.main_capsule ? (
             <img src={bundle.main_capsule} alt={bundle.name || "Bundle"} />
           ) : (
-            <p>Imagem não disponível</p>
+            <div style={{width: '100%', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#333'}}>
+              <p>Imagem não disponível</p>
+            </div>
           )}
           <div className="card-content">
             <h3>{bundle.name}</h3>
